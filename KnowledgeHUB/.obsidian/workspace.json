@@ -76,7 +76,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "a4416b909fd16e42",
@@ -156,7 +157,17 @@
   },
   "active": "6720fcf137ebb643",
   "lastOpenFiles": [
-    "Excalidraw/Drawing 2023-06-13 17.03.12.excalidraw.md",
-    "Excalidraw"
+    "app/src/main/java/com/study/quizzler/activities/AnswersPage.java",
+    "app/src/main/res/layout/activity_answers_page.xml",
+    "app/src/main/java/com/study/quizzler/activities/QuestionPage.java",
+    "app/src/main/res/layout/activity_question_page.xml",
+    "app/src/main/java/com/study/quizzler/activities/SettingsPage.java",
+    "app/src/main/res/layout/activity_settings_page.xml",
+    "app/src/main/java/com/study/quizzler/activities/SignUpPage.java",
+    "app/src/main/res/layout/activity_sign_up_page.xml",
+    "app/src/main/res/layout/activity_sign_in_page.xml~",
+    "app/src/main/java/com/study/quizzler/activities/SignInPage.java",
+    "app/src/main/res/layout/activity_sign_in_page.xml",
+    "Excalidraw/Drawing 2023-06-13 17.03.12.excalidraw.md"
   ]
 }
