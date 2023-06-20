@@ -7,28 +7,19 @@
     android:gravity="bottom"
     >
 
-    <FrameLayout
+
+    <TextView
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"/>
+        android:layout_height="wrap_content"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="100dp"
+        android:rotation="-5"
+        android:text="@string/your_name"
+        android:textColor="#1a344b"
+        android:textSize="30sp"
+        android:textStyle="bold"
 
-
-
-<TextView
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:text="@string/your_name"
-android:textColor="#1a344b"
-android:textSize="30sp"
-android:textStyle="bold"
-android:layout_marginStart="33dp"
-android:layout_marginTop="100dp"
-android:rotation="-5"
-
-    />
-
-
+        />
 
 
 </LinearLayout>
