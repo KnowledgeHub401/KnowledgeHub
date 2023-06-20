@@ -1,9 +1,34 @@
 <resources>
     <string name="app_name">Quizzler</string>
+<<<<<<< HEAD
     <string name="username">Username</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="sign_up">Sign Up</string>
     <string name="sign_in">Sign In</string>
     <string name="don_t_have_an_account_sign_up">Don\'t have an account? Sign up</string>
+=======
+    <string name="about_us">About Us</string>
+    <string name="settings" />
+    <string name="nav_menu_answers_button" />
+    <string name="nav_menu_about_us_button" />
+    <string name="nav_menu_settings_button" />
+    <string name="nav_menu_logout_button" />
+    <string name="your_name">Your Name</string>
+    <string name="github_com_quizzlercorp">github.com/QuizzlerCorp</string>
+    <string name="close_hamburger_menu">close hamburger menu</string>
+    <string name="profile">Profile</string>
+    <string name="question_list">Question List</string>
+    <string name="logout">Logout</string>
+    <string name="Settings" />
+    <string name="Logout" />
+    <string name="Profile" />
+    <string name="Communication" />
+    <string name="Share" />
+    <string name="Rate_Us" />
+    <string name="Home" />
+    <string name="open">Open Navigation Drawer</string>
+    <string name="close">Close Navigation Drawer</string>
+
+>>>>>>> c4a9cc3c1cd267519b22e4c35a899124b0c03689
 </resources>
