@@ -15,6 +15,7 @@ import com.study.quizzler.R;
 import com.study.quizzler.activities.AboutUs;
 import com.study.quizzler.activities.QuestionPage;
 import com.study.quizzler.activities.SettingsPage;
+import com.study.quizzler.activities.SignInPage;
 
 public class NavigationItemSelectedListener implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -24,7 +25,7 @@ public class NavigationItemSelectedListener implements NavigationView.OnNavigati
         this.context = context;
     }
 
-    private void showToast(String message) {
+    private void ShowToast(String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
@@ -33,27 +34,28 @@ public class NavigationItemSelectedListener implements NavigationView.OnNavigati
         int itemId = item.getItemId();
 
         if (itemId == R.id.navMenuHomeButton) {
-            showToast("Home Selected");
+            ShowToast("Home Selected");
             if (context instanceof MainActivity) {
                 closeNavigationDrawer();
             } else {
-                openMainActivity();
+                OpenMainActivity();
             }
         } else if (itemId == R.id.navMenuAboutUsButton) {
-            showToast("About Us Selected");
-            openAboutUsPage();
+            ShowToast("About Us Selected");
+            OpenAboutUsPage();
         } else if (itemId == R.id.navMenuAnswersButton) {
-            showToast("Questions Page Selected");
-            openQuestionsPage();
+            ShowToast("Questions Page Selected");
+            OpenQuestionsPage();
         } else if (itemId == R.id.navMenuSettingsButton) {
-            showToast("Settings Selected");
-            openSettingsActivity();
+            ShowToast("Settings Selected");
+            OpenSettingsActivity();
         } else if (itemId == R.id.navMenuLogoutButton) {
-            showToast("Logout Selected");
+            ShowToast("Logout Selected");
+            Logout();
         } else if (itemId == R.id.navMenuRateUsButton) {
-            showToast("Rate Us Selected");
+            ShowToast("Rate Us Selected");
         } else if (itemId == R.id.navMenuShareButton) {
-            showToast("Share Selected");
+            ShowToast("Share Selected");
         }
         return true;
     }
@@ -63,26 +65,32 @@ public class NavigationItemSelectedListener implements NavigationView.OnNavigati
             drawerLayout.closeDrawer(GravityCompat.START);
         }
     }
-    private void openMainActivity() {
+    private void OpenMainActivity() {
         Intent intent = new Intent(context, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Clear the activity stack
         context.startActivity(intent);
         ((Activity) context).finish(); // Finish the current activity
     }
-    private void openSettingsActivity(){
+    private void OpenSettingsActivity(){
         Intent intent = new Intent(context, SettingsPage.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Clear the activity stack
         context.startActivity(intent);
         ((Activity) context).finish(); // Finish the current activity
     }
-    private void openQuestionsPage(){
+    private void OpenQuestionsPage(){
         Intent intent = new Intent(context, QuestionPage.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Clear the activity stack
         context.startActivity(intent);
         ((Activity) context).finish(); // Finish the current activity
     }
-    private void openAboutUsPage(){
+    private void OpenAboutUsPage(){
         Intent intent = new Intent(context, AboutUs.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Clear the activity stack
+        context.startActivity(intent);
+        ((Activity) context).finish(); // Finish the current activity
+    }
+    private void Logout(){
+        Intent intent = new Intent(context, SignInPage.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Clear the activity stack
         context.startActivity(intent);
         ((Activity) context).finish(); // Finish the current activity
