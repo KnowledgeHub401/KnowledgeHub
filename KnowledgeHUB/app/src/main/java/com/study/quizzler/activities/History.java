@@ -13,7 +13,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.study.quizzler.R;
 import com.study.quizzler.listeners.NavigationItemSelectedListener;
 
-public class QuestionPage extends AppCompatActivity {
+public class History extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;

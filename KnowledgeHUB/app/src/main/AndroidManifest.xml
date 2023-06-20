@@ -16,10 +16,7 @@
             android:name="com.study.quizzler.activities.AboutUs"
             android:exported="false" />
         <activity
-            android:name="com.study.quizzler.activities.AnswersPage"
-            android:exported="false" />
-        <activity
-            android:name="com.study.quizzler.activities.QuestionPage"
+            android:name="com.study.quizzler.activities.History"
             android:exported="false" />
         <activity
             android:name="com.study.quizzler.activities.SettingsPage"
