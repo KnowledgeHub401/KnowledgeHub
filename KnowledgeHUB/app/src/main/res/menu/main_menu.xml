@@ -12,7 +12,7 @@
         android:title="@string/about_us"
         />
     <item android:id="@+id/navMenuAnswersButton"
-        android:icon="@drawable/nav_menu_questions_icon"
+        android:icon="@drawable/nav_menu_question_icon"
         android:title="@string/question_list"
         />
 </group>
