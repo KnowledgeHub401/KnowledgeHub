@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<group android:checkableBehavior="single">
+
+    <item android:id="@+id/navMenuHomeButton"
+        android:icon="@drawable/nav_menu_home_icon"
+        android:title="Home"
+        />
+
+    <item android:id="@+id/navMenuAboutUsButton"
+        android:icon="@drawable/nav_menu_about_us_icon"
+        android:title="@string/about_us"
+        />
+    <item android:id="@+id/navMenuAnswersButton"
+        android:icon="@drawable/nav_menu_questions_icon"
+        android:title="@string/question_list"
+        />
+</group>
+    <item android:title="Profile">
+        <menu>
+<group android:checkableBehavior="single">
+    <item
+        android:id="@+id/navMenuSettingsButton"
+        android:icon="@drawable/nav_menu_settings_icon"
+        android:title="Settings"
+        />
+
+    <item android:id="@+id/navMenuLogoutButton"
+        android:icon="@drawable/nav_menu_logout_icon"
+        android:title="Logout"
+        />
+</group>
+        </menu>
+    </item>
+    <item android:title="Communication">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/navMenuShareButton"
+                    android:icon="@drawable/nav_menu_share_icon"
+                    android:title="Share"
+                    />
+
+                <item android:id="@+id/navMenuRateUsButton"
+                    android:icon="@drawable/nav_menu_rate_us_icon"
+                    android:title="Rate Us"
+                    />
+            </group>
+        </menu>
+    </item>
+
+</menu>
