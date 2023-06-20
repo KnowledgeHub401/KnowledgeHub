@@ -13,7 +13,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.study.quizzler.MainActivity;
 import com.study.quizzler.R;
 import com.study.quizzler.activities.AboutUs;
-import com.study.quizzler.activities.QuestionPage;
+import com.study.quizzler.activities.History;
 import com.study.quizzler.activities.SettingsPage;
 import com.study.quizzler.activities.SignInPage;
 
@@ -41,21 +41,21 @@ public class NavigationItemSelectedListener implements NavigationView.OnNavigati
                 OpenMainActivity();
             }
         } else if (itemId == R.id.navMenuAboutUsButton) {
-            ShowToast("About Us Selected");
+            ShowToast("About Us Page Selected");
             OpenAboutUsPage();
-        } else if (itemId == R.id.navMenuAnswersButton) {
-            ShowToast("Questions Page Selected");
+        } else if (itemId == R.id.navMenuHistoryButton) {
+            ShowToast("History Page Selected");
             OpenQuestionsPage();
         } else if (itemId == R.id.navMenuSettingsButton) {
-            ShowToast("Settings Selected");
+            ShowToast("Settings Page Selected");
             OpenSettingsActivity();
         } else if (itemId == R.id.navMenuLogoutButton) {
-            ShowToast("Logout Selected");
+            ShowToast("Logout Button Selected");
             Logout();
         } else if (itemId == R.id.navMenuRateUsButton) {
-            ShowToast("Rate Us Selected");
+            ShowToast("Rate Us Button Selected");
         } else if (itemId == R.id.navMenuShareButton) {
-            ShowToast("Share Selected");
+            ShowToast("Share Button Selected");
         }
         return true;
     }
@@ -78,7 +78,7 @@ public class NavigationItemSelectedListener implements NavigationView.OnNavigati
         ((Activity) context).finish(); // Finish the current activity
     }
     private void OpenQuestionsPage(){
-        Intent intent = new Intent(context, QuestionPage.class);
+        Intent intent = new Intent(context, History.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Clear the activity stack
         context.startActivity(intent);
         ((Activity) context).finish(); // Finish the current activity
