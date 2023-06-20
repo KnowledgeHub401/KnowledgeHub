@@ -11,19 +11,13 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.study.quizzler.listeners.NavigationItemSelectedListener;
 
 public class MainActivity extends AppCompatActivity {
-DrawerLayout drawerLayout;
-NavigationView navigationView;
-ActionBarDrawerToggle drawerToggle;
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(drawerToggle.onOptionsItemSelected(item)){
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private ActionBarDrawerToggle drawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,55 +26,28 @@ ActionBarDrawerToggle drawerToggle;
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_menu);
-        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout,R.string.open, R.string.close );
+
+        // Initialize the ActionBarDrawerToggle
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.navMenuHomeButton:
-                    {
-                        Toast.makeText(MainActivity.this, "Home Selected", Toast.LENGTH_SHORT).show();
-                        break;
-                    }
-                    case R.id.navMenuAboutUsButton:
-                    {
-                        Toast.makeText(MainActivity.this, "About Us Selected", Toast.LENGTH_SHORT).show();
-                        break;
-                    }
-                    case R.id.navMenuAnswersButton:
-                    {
-                        Toast.makeText(MainActivity.this, "Questions Page Selected", Toast.LENGTH_SHORT).show();
-                        break;
-                    }
-                    case R.id.navMenuSettingsButton:
-                    {
-                        Toast.makeText(MainActivity.this, "Settings Selected", Toast.LENGTH_SHORT).show();
-                        break;
-                    }
-                    case R.id.navMenuLogoutButton:
-                    {
-                        Toast.makeText(MainActivity.this, "Logout Selected", Toast.LENGTH_SHORT).show();
-                        break;
-                    }
-                    case R.id.navMenuRateUsButton:
-                    {
-                        Toast.makeText(MainActivity.this, "Rate Us Selected", Toast.LENGTH_SHORT).show();
-                        break;
-                    }
-                    case R.id.navMenuShareButton:
-                    {
-                        Toast.makeText(MainActivity.this, "Share Selected", Toast.LENGTH_SHORT).show();
-                        break;
-                    }
 
-                }
-                return false;
-            }
-        });
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // Set the custom NavigationItemSelectedListener
+        NavigationItemSelectedListener navigationItemSelectedListener = new NavigationItemSelectedListener(this);
+        navigationView.setNavigationItemSelectedListener(navigationItemSelectedListener);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (drawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
 
     @Override
     public void onBackPressed(){
