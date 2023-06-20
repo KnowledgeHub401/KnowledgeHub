@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import com.study.quizzler.listeners.NavigationItemSelectedListener;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         // Set the custom NavigationItemSelectedListener
         NavigationItemSelectedListener navigationItemSelectedListener = new NavigationItemSelectedListener(this);
