@@ -1,16 +1,22 @@
 package com.study.quizzler.activities;
 
+import static com.study.quizzler.R.*;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.material.navigation.NavigationView;
 import com.study.quizzler.R;
+import com.study.quizzler.fragments.QuestionsFragment;
 import com.study.quizzler.listeners.NavigationItemSelectedListener;
 
 public class History extends AppCompatActivity {
@@ -22,13 +28,13 @@ public class History extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(layout.activity_main);
 
-        drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_menu);
+        drawerLayout = findViewById(id.drawer_layout);
+        navigationView = findViewById(id.nav_menu);
 
         // Initialize the ActionBarDrawerToggle
-        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, string.open, string.close);
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
@@ -37,6 +43,21 @@ public class History extends AppCompatActivity {
         // Set the custom NavigationItemSelectedListener
         NavigationItemSelectedListener navigationItemSelectedListener = new NavigationItemSelectedListener(this);
         navigationView.setNavigationItemSelectedListener(navigationItemSelectedListener);
+
+        // Create Fragment Instance
+        QuestionsFragment questionsFragment= new QuestionsFragment();
+
+        // Get Fragment Manager
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        // Fragment Transaction
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        // Add the fragment to the container
+        fragmentTransaction.add(id.questionsFragmentFragment, questionsFragment);
+        fragmentTransaction.commit();
+
+
     }
 
     @Override
