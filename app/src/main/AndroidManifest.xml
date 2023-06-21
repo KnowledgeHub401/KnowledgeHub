@@ -12,13 +12,13 @@
         android:theme="@style/Theme.Quizzler"
         tools:targetApi="31" >
         <activity
+            android:name=".activities.SettingsPage"
+            android:exported="false" />
+        <activity
             android:name=".activities.AboutUs"
             android:exported="false" />
         <activity
-            android:name=".activities.History"
-            android:exported="false" />
-        <activity
-            android:name=".activities.SettingsPage"
+            android:name=".activities.HistoryPage"
             android:exported="false" />
         <activity
             android:name=".activities.SignUpPage"

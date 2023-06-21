@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity  {
         pieChart = findViewById(R.id.chart);
         getData();
         setupPieChart();
+
         List<Float> newValues = new ArrayList<>();
         newValues.add(30.0f);
         newValues.add(70.0f);
@@ -83,8 +84,6 @@ public class MainActivity extends AppCompatActivity  {
 
 
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.GREEN);  // Set the color for the "Green" slice
-        colors.add(Color.RED);   // Set the color for the "Blue" slice
         PieDataSet dataSet = new PieDataSet(pieEntries, "");
         dataSet.setColors(colors);
         dataSet.setValueFormatter(new PercentFormatter());
