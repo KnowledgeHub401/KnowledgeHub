@@ -37,6 +37,11 @@
     <string name="close">Close Navigation Drawer</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="question">Question</string>
+    <string name="answerOne">AnswerOne</string>
+    <string name="answerFour">Answer Four</string>
+    <string name="answerThree">Answer Three</string>
+    <string name="answerTwo">Answer Two</string>
 
     >>>>>>> c4a9cc3c1cd267519b22e4c35a899124b0c03689
 </resources>
