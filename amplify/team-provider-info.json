@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-knowledgehub-dev-221516-authRole",
+      "UnauthRoleArn": "arn:aws:iam::612998444197:role/amplify-knowledgehub-dev-221516-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::612998444197:role/amplify-knowledgehub-dev-221516-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-knowledgehub-dev-221516-deployment",
+      "UnauthRoleName": "amplify-knowledgehub-dev-221516-unauthRole",
+      "StackName": "amplify-knowledgehub-dev-221516",
+      "StackId": "arn:aws:cloudformation:us-east-2:612998444197:stack/amplify-knowledgehub-dev-221516/776c7320-0fd9-11ee-83b1-06adf45e25c5",
+      "AmplifyAppId": "d9vqdhg4oagc9"
+    },
+    "categories": {
+      "api": {
+        "knowledgehub": {}
+      }
+    }
+  }
+}
