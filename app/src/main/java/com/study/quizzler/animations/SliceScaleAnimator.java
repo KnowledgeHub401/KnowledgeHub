@@ -1,4 +1,4 @@
-package com.study.quizzler.activities.animations;
+package com.study.quizzler.animations;
 
 import android.animation.ValueAnimator;
 import android.view.animation.DecelerateInterpolator;
