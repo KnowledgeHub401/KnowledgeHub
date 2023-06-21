@@ -4,6 +4,66 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".activities.SignInPage">
+
+    <EditText
+        android:id="@+id/etUsernameSignIn"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="240dp"
+        android:autofillHints=""
+        android:hint="@string/username"
+        android:inputType="text"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etPasswordSignIn"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:autofillHints=""
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnSignIn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etUsernameSignIn"
+        app:layout_constraintVertical_bias="0.357" />
+
+    <Button
+        android:id="@+id/btnSignIn"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="220dp"
+        android:text="@string/sign_in"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:minHeight="20dp"
+        android:onClick="onSignUpClicked"
+        android:text="Don't have an account? Sign up"
+        android:textColor="@color/clickable_text_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSignIn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
