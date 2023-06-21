@@ -1,7 +1,5 @@
 package com.study.quizzler.activities;
 
-import static com.study.quizzler.R.*;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,14 +10,14 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.google.android.material.navigation.NavigationView;
 import com.study.quizzler.R;
 import com.study.quizzler.fragments.QuestionsFragment;
 import com.study.quizzler.listeners.NavigationItemSelectedListener;
 
-public class History extends AppCompatActivity {
+
+public class HistoryPage extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -28,13 +26,13 @@ public class History extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(layout.activity_main);
+        setContentView(R.layout.activity_history_page);
 
-        drawerLayout = findViewById(id.drawer_layout);
-        navigationView = findViewById(id.nav_menu);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_menu);
 
         // Initialize the ActionBarDrawerToggle
-        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, string.open, string.close);
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
@@ -54,7 +52,7 @@ public class History extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         // Add the fragment to the container
-        fragmentTransaction.add(id.questionsFragmentFragment, questionsFragment);
+        fragmentTransaction.add(R.id.questionsFragmentFragment, questionsFragment);
         fragmentTransaction.commit();
 
 

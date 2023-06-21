@@ -1,5 +1,6 @@
 package com.study.quizzler.adapters;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +9,9 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amplifyframework.datastore.generated.model.Question;
 import com.study.quizzler.R;
+import com.study.quizzler.activities.Quiz;
 
 import java.util.List;
 
@@ -43,6 +46,17 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ButtonView
         // Set the icon on the left side and center it
         holder.button.setCompoundDrawablesWithIntrinsicBounds(buttonIcon, 0, 0, 0);
         holder.button.setCompoundDrawablePadding(10); // Add padding between icon and text
+        holder.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Handle the button click event here
+                // You can start a new activity or perform any other action based on the button clicked
+
+                // Example: Start a new activity
+                Intent intent = new Intent(view.getContext(), Quiz.class);
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override

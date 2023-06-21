@@ -13,7 +13,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.study.quizzler.MainActivity;
 import com.study.quizzler.R;
 import com.study.quizzler.activities.AboutUs;
-import com.study.quizzler.activities.History;
+import com.study.quizzler.activities.HistoryPage;
 import com.study.quizzler.activities.SettingsPage;
 import com.study.quizzler.activities.SignInPage;
 
@@ -78,7 +78,7 @@ public class NavigationItemSelectedListener implements NavigationView.OnNavigati
         ((Activity) context).finish(); // Finish the current activity
     }
     private void OpenQuestionsPage(){
-        Intent intent = new Intent(context, History.class);
+        Intent intent = new Intent(context, HistoryPage.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Clear the activity stack
         context.startActivity(intent);
         ((Activity) context).finish(); // Finish the current activity

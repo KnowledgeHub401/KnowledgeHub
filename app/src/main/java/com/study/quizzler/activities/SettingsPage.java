@@ -1,17 +1,19 @@
+
+
 package com.study.quizzler.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
+        import androidx.annotation.NonNull;
+        import androidx.appcompat.app.ActionBarDrawerToggle;
+        import androidx.appcompat.app.AppCompatActivity;
+        import androidx.core.view.GravityCompat;
+        import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.os.Bundle;
-import android.view.MenuItem;
+        import android.os.Bundle;
+        import android.view.MenuItem;
 
-import com.google.android.material.navigation.NavigationView;
-import com.study.quizzler.R;
-import com.study.quizzler.listeners.NavigationItemSelectedListener;
+        import com.google.android.material.navigation.NavigationView;
+        import com.study.quizzler.R;
+        import com.study.quizzler.listeners.NavigationItemSelectedListener;
 
 public class SettingsPage extends AppCompatActivity {
 
@@ -22,7 +24,7 @@ public class SettingsPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_settings_page);
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_menu);
