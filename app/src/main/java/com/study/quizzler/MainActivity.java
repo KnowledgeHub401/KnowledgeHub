@@ -5,21 +5,20 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
-import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
-import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
-import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.navigation.NavigationView;
+import com.study.quizzler.adapters.ButtonAdapter;
 import com.study.quizzler.listeners.NavigationItemSelectedListener;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +30,13 @@ public class MainActivity extends AppCompatActivity  {
     private NavigationView navigationView;
     private ActionBarDrawerToggle drawerToggle;
     PieChart pieChart;
-
     PieDataSet pieDataSet;
     ArrayList<PieEntry> pieEntries;
+    private ButtonAdapter buttonAdapter;
+    private RecyclerView recyclerView;
+    private List<String> buttonNames;
+    private List<Integer> buttonColors;
+    private List<Integer> buttonIcons;
 
 
     @Override
@@ -41,6 +44,11 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Initialize RecyclerView
+         recyclerView = findViewById(R.id.main_activity_recycler_view);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        setupRecyclerView();
 
         // CHART CODE
         pieChart = findViewById(R.id.chart);
@@ -145,6 +153,35 @@ public class MainActivity extends AppCompatActivity  {
             super.onBackPressed();
         }
     }
+    private void setupRecyclerView() {
+        buttonNames = new ArrayList<>();
+        buttonNames.add("Sports");
+        buttonNames.add("Cmp Sci");
+        buttonNames.add("Animals");
+        buttonNames.add("Art");
+        buttonNames.add("Fantasy");
+        buttonNames.add("History");
 
+        buttonColors = new ArrayList<>();
+        buttonColors.add(Color.RED);
+        buttonColors.add(Color.BLUE);
+        buttonColors.add(Color.GREEN);
+        buttonColors.add(Color.YELLOW);
+        buttonColors.add(Color.MAGENTA);
+        buttonColors.add(Color.CYAN);
+
+        buttonIcons = new ArrayList<>();
+        buttonIcons.add(R.drawable.main_activity_button_sports_icon);
+        buttonIcons.add(R.drawable.main_activity_button_computer_science_icon);
+        buttonIcons.add(R.drawable.main_activity_button_animals_icon);
+        buttonIcons.add(R.drawable.main_activity_button_art_icon);
+        buttonIcons.add(R.drawable.main_activity_button_mythology_icon);
+        buttonIcons.add(R.drawable.main_activity_button_history_icon);
+
+        buttonAdapter = new ButtonAdapter(buttonNames, buttonColors, buttonIcons);
+        recyclerView.setAdapter(buttonAdapter);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+
+    }
 
 }
