@@ -1,0 +1,433 @@
+# this is an auto generated file. This will be overwritten
+mutation CreateQuestion(
+  $input: CreateQuestionInput!
+  $condition: ModelQuestionConditionInput
+) {
+  createQuestion(input: $input, condition: $condition) {
+    id
+    category
+    type
+    difficulty
+    question
+    correct_answer
+    incorrect_answers
+    correctness
+    quizID
+    quiz {
+      id
+      numberQuestions
+      difficulty
+      category
+      userID
+      user {
+        id
+        username
+        password
+        name
+        email
+        createdAt
+        updatedAt
+      }
+      questions {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    userID
+    user {
+      id
+      username
+      password
+      name
+      email
+      quizzes {
+        nextToken
+      }
+      history {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateQuestion(
+  $input: UpdateQuestionInput!
+  $condition: ModelQuestionConditionInput
+) {
+  updateQuestion(input: $input, condition: $condition) {
+    id
+    category
+    type
+    difficulty
+    question
+    correct_answer
+    incorrect_answers
+    correctness
+    quizID
+    quiz {
+      id
+      numberQuestions
+      difficulty
+      category
+      userID
+      user {
+        id
+        username
+        password
+        name
+        email
+        createdAt
+        updatedAt
+      }
+      questions {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    userID
+    user {
+      id
+      username
+      password
+      name
+      email
+      quizzes {
+        nextToken
+      }
+      history {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteQuestion(
+  $input: DeleteQuestionInput!
+  $condition: ModelQuestionConditionInput
+) {
+  deleteQuestion(input: $input, condition: $condition) {
+    id
+    category
+    type
+    difficulty
+    question
+    correct_answer
+    incorrect_answers
+    correctness
+    quizID
+    quiz {
+      id
+      numberQuestions
+      difficulty
+      category
+      userID
+      user {
+        id
+        username
+        password
+        name
+        email
+        createdAt
+        updatedAt
+      }
+      questions {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    userID
+    user {
+      id
+      username
+      password
+      name
+      email
+      quizzes {
+        nextToken
+      }
+      history {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateQuiz(
+  $input: CreateQuizInput!
+  $condition: ModelQuizConditionInput
+) {
+  createQuiz(input: $input, condition: $condition) {
+    id
+    numberQuestions
+    difficulty
+    category
+    userID
+    user {
+      id
+      username
+      password
+      name
+      email
+      quizzes {
+        nextToken
+      }
+      history {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    questions {
+      items {
+        id
+        category
+        type
+        difficulty
+        question
+        correct_answer
+        incorrect_answers
+        correctness
+        quizID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateQuiz(
+  $input: UpdateQuizInput!
+  $condition: ModelQuizConditionInput
+) {
+  updateQuiz(input: $input, condition: $condition) {
+    id
+    numberQuestions
+    difficulty
+    category
+    userID
+    user {
+      id
+      username
+      password
+      name
+      email
+      quizzes {
+        nextToken
+      }
+      history {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    questions {
+      items {
+        id
+        category
+        type
+        difficulty
+        question
+        correct_answer
+        incorrect_answers
+        correctness
+        quizID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteQuiz(
+  $input: DeleteQuizInput!
+  $condition: ModelQuizConditionInput
+) {
+  deleteQuiz(input: $input, condition: $condition) {
+    id
+    numberQuestions
+    difficulty
+    category
+    userID
+    user {
+      id
+      username
+      password
+      name
+      email
+      quizzes {
+        nextToken
+      }
+      history {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    questions {
+      items {
+        id
+        category
+        type
+        difficulty
+        question
+        correct_answer
+        incorrect_answers
+        correctness
+        quizID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateQuizzlerUser(
+  $input: CreateQuizzlerUserInput!
+  $condition: ModelQuizzlerUserConditionInput
+) {
+  createQuizzlerUser(input: $input, condition: $condition) {
+    id
+    username
+    password
+    name
+    email
+    quizzes {
+      items {
+        id
+        numberQuestions
+        difficulty
+        category
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    history {
+      items {
+        id
+        category
+        type
+        difficulty
+        question
+        correct_answer
+        incorrect_answers
+        correctness
+        quizID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateQuizzlerUser(
+  $input: UpdateQuizzlerUserInput!
+  $condition: ModelQuizzlerUserConditionInput
+) {
+  updateQuizzlerUser(input: $input, condition: $condition) {
+    id
+    username
+    password
+    name
+    email
+    quizzes {
+      items {
+        id
+        numberQuestions
+        difficulty
+        category
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    history {
+      items {
+        id
+        category
+        type
+        difficulty
+        question
+        correct_answer
+        incorrect_answers
+        correctness
+        quizID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteQuizzlerUser(
+  $input: DeleteQuizzlerUserInput!
+  $condition: ModelQuizzlerUserConditionInput
+) {
+  deleteQuizzlerUser(input: $input, condition: $condition) {
+    id
+    username
+    password
+    name
+    email
+    quizzes {
+      items {
+        id
+        numberQuestions
+        difficulty
+        category
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    history {
+      items {
+        id
+        category
+        type
+        difficulty
+        question
+        correct_answer
+        incorrect_answers
+        correctness
+        quizID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}

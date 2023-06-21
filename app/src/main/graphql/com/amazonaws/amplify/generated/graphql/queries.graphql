@@ -1,0 +1,367 @@
+# this is an auto generated file. This will be overwritten
+query GetQuestion($id: ID!) {
+  getQuestion(id: $id) {
+    id
+    category
+    type
+    difficulty
+    question
+    correct_answer
+    incorrect_answers
+    correctness
+    quizID
+    quiz {
+      id
+      numberQuestions
+      difficulty
+      category
+      userID
+      user {
+        id
+        username
+        password
+        name
+        email
+        createdAt
+        updatedAt
+      }
+      questions {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    userID
+    user {
+      id
+      username
+      password
+      name
+      email
+      quizzes {
+        nextToken
+      }
+      history {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListQuestions(
+  $filter: ModelQuestionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listQuestions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      category
+      type
+      difficulty
+      question
+      correct_answer
+      incorrect_answers
+      correctness
+      quizID
+      quiz {
+        id
+        numberQuestions
+        difficulty
+        category
+        userID
+        createdAt
+        updatedAt
+      }
+      userID
+      user {
+        id
+        username
+        password
+        name
+        email
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetQuiz($id: ID!) {
+  getQuiz(id: $id) {
+    id
+    numberQuestions
+    difficulty
+    category
+    userID
+    user {
+      id
+      username
+      password
+      name
+      email
+      quizzes {
+        nextToken
+      }
+      history {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    questions {
+      items {
+        id
+        category
+        type
+        difficulty
+        question
+        correct_answer
+        incorrect_answers
+        correctness
+        quizID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListQuizzes(
+  $filter: ModelQuizFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listQuizzes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      numberQuestions
+      difficulty
+      category
+      userID
+      user {
+        id
+        username
+        password
+        name
+        email
+        createdAt
+        updatedAt
+      }
+      questions {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetQuizzlerUser($id: ID!) {
+  getQuizzlerUser(id: $id) {
+    id
+    username
+    password
+    name
+    email
+    quizzes {
+      items {
+        id
+        numberQuestions
+        difficulty
+        category
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    history {
+      items {
+        id
+        category
+        type
+        difficulty
+        question
+        correct_answer
+        incorrect_answers
+        correctness
+        quizID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListQuizzlerUsers(
+  $filter: ModelQuizzlerUserFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listQuizzlerUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      username
+      password
+      name
+      email
+      quizzes {
+        nextToken
+      }
+      history {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query QuestionsByQuizID(
+  $quizID: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelQuestionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  questionsByQuizID(
+    quizID: $quizID
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      category
+      type
+      difficulty
+      question
+      correct_answer
+      incorrect_answers
+      correctness
+      quizID
+      quiz {
+        id
+        numberQuestions
+        difficulty
+        category
+        userID
+        createdAt
+        updatedAt
+      }
+      userID
+      user {
+        id
+        username
+        password
+        name
+        email
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query QuestionsByUserID(
+  $userID: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelQuestionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  questionsByUserID(
+    userID: $userID
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      category
+      type
+      difficulty
+      question
+      correct_answer
+      incorrect_answers
+      correctness
+      quizID
+      quiz {
+        id
+        numberQuestions
+        difficulty
+        category
+        userID
+        createdAt
+        updatedAt
+      }
+      userID
+      user {
+        id
+        username
+        password
+        name
+        email
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query QuizzesByUserID(
+  $userID: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelQuizFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  quizzesByUserID(
+    userID: $userID
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      numberQuestions
+      difficulty
+      category
+      userID
+      user {
+        id
+        username
+        password
+        name
+        email
+        createdAt
+        updatedAt
+      }
+      questions {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
