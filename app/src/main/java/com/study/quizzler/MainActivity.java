@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity  {
         buttonColors.add(Color.RED);
         buttonColors.add(Color.BLUE);
         buttonColors.add(Color.GREEN);
-        buttonColors.add(Color.YELLOW);
+        buttonColors.add(Color.BLACK);
         buttonColors.add(Color.MAGENTA);
         buttonColors.add(Color.CYAN);
 
