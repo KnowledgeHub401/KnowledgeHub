@@ -8,45 +8,6 @@ subscription OnCreateQuestion($filter: ModelSubscriptionQuestionFilterInput) {
     question
     correct_answer
     incorrect_answers
-    correctness
-    quizID
-    quiz {
-      id
-      numberQuestions
-      difficulty
-      category
-      userID
-      user {
-        id
-        username
-        password
-        name
-        email
-        createdAt
-        updatedAt
-      }
-      questions {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    userID
-    user {
-      id
-      username
-      password
-      name
-      email
-      quizzes {
-        nextToken
-      }
-      history {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
     createdAt
     updatedAt
   }
@@ -60,45 +21,6 @@ subscription OnUpdateQuestion($filter: ModelSubscriptionQuestionFilterInput) {
     question
     correct_answer
     incorrect_answers
-    correctness
-    quizID
-    quiz {
-      id
-      numberQuestions
-      difficulty
-      category
-      userID
-      user {
-        id
-        username
-        password
-        name
-        email
-        createdAt
-        updatedAt
-      }
-      questions {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    userID
-    user {
-      id
-      username
-      password
-      name
-      email
-      quizzes {
-        nextToken
-      }
-      history {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
     createdAt
     updatedAt
   }
@@ -112,45 +34,6 @@ subscription OnDeleteQuestion($filter: ModelSubscriptionQuestionFilterInput) {
     question
     correct_answer
     incorrect_answers
-    correctness
-    quizID
-    quiz {
-      id
-      numberQuestions
-      difficulty
-      category
-      userID
-      user {
-        id
-        username
-        password
-        name
-        email
-        createdAt
-        updatedAt
-      }
-      questions {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    userID
-    user {
-      id
-      username
-      password
-      name
-      email
-      quizzes {
-        nextToken
-      }
-      history {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
     createdAt
     updatedAt
   }
@@ -161,39 +44,6 @@ subscription OnCreateQuiz($filter: ModelSubscriptionQuizFilterInput) {
     numberQuestions
     difficulty
     category
-    userID
-    user {
-      id
-      username
-      password
-      name
-      email
-      quizzes {
-        nextToken
-      }
-      history {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    questions {
-      items {
-        id
-        category
-        type
-        difficulty
-        question
-        correct_answer
-        incorrect_answers
-        correctness
-        quizID
-        userID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
     createdAt
     updatedAt
   }
@@ -204,39 +54,6 @@ subscription OnUpdateQuiz($filter: ModelSubscriptionQuizFilterInput) {
     numberQuestions
     difficulty
     category
-    userID
-    user {
-      id
-      username
-      password
-      name
-      email
-      quizzes {
-        nextToken
-      }
-      history {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    questions {
-      items {
-        id
-        category
-        type
-        difficulty
-        question
-        correct_answer
-        incorrect_answers
-        correctness
-        quizID
-        userID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
     createdAt
     updatedAt
   }
@@ -247,39 +64,6 @@ subscription OnDeleteQuiz($filter: ModelSubscriptionQuizFilterInput) {
     numberQuestions
     difficulty
     category
-    userID
-    user {
-      id
-      username
-      password
-      name
-      email
-      quizzes {
-        nextToken
-      }
-      history {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    questions {
-      items {
-        id
-        category
-        type
-        difficulty
-        question
-        correct_answer
-        incorrect_answers
-        correctness
-        quizID
-        userID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
     createdAt
     updatedAt
   }
@@ -293,35 +77,6 @@ subscription OnCreateQuizzlerUser(
     password
     name
     email
-    quizzes {
-      items {
-        id
-        numberQuestions
-        difficulty
-        category
-        userID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    history {
-      items {
-        id
-        category
-        type
-        difficulty
-        question
-        correct_answer
-        incorrect_answers
-        correctness
-        quizID
-        userID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
     createdAt
     updatedAt
   }
@@ -335,35 +90,6 @@ subscription OnUpdateQuizzlerUser(
     password
     name
     email
-    quizzes {
-      items {
-        id
-        numberQuestions
-        difficulty
-        category
-        userID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    history {
-      items {
-        id
-        category
-        type
-        difficulty
-        question
-        correct_answer
-        incorrect_answers
-        correctness
-        quizID
-        userID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
     createdAt
     updatedAt
   }
@@ -377,35 +103,6 @@ subscription OnDeleteQuizzlerUser(
     password
     name
     email
-    quizzes {
-      items {
-        id
-        numberQuestions
-        difficulty
-        category
-        userID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    history {
-      items {
-        id
-        category
-        type
-        difficulty
-        question
-        correct_answer
-        incorrect_answers
-        correctness
-        quizID
-        userID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
     createdAt
     updatedAt
   }

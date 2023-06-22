@@ -231,74 +231,6 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "correctness",
-                        "description": null,
-                        "args": [],
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "Boolean",
-                            "ofType": null
-                        },
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "quizID",
-                        "description": null,
-                        "args": [],
-                        "type": {
-                            "kind": "NON_NULL",
-                            "name": null,
-                            "ofType": {
-                                "kind": "SCALAR",
-                                "name": "ID",
-                                "ofType": null
-                            }
-                        },
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "quiz",
-                        "description": null,
-                        "args": [],
-                        "type": {
-                            "kind": "OBJECT",
-                            "name": "Quiz",
-                            "ofType": null
-                        },
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "userID",
-                        "description": null,
-                        "args": [],
-                        "type": {
-                            "kind": "NON_NULL",
-                            "name": null,
-                            "ofType": {
-                                "kind": "SCALAR",
-                                "name": "ID",
-                                "ofType": null
-                            }
-                        },
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "user",
-                        "description": null,
-                        "args": [],
-                        "type": {
-                            "kind": "OBJECT",
-                            "name": "QuizzlerUser",
-                            "ofType": null
-                        },
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
                         "name": "createdAt",
                         "description": null,
                         "args": [],
@@ -428,95 +360,6 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "userID",
-                        "description": null,
-                        "args": [],
-                        "type": {
-                            "kind": "NON_NULL",
-                            "name": null,
-                            "ofType": {
-                                "kind": "SCALAR",
-                                "name": "ID",
-                                "ofType": null
-                            }
-                        },
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "user",
-                        "description": null,
-                        "args": [],
-                        "type": {
-                            "kind": "OBJECT",
-                            "name": "QuizzlerUser",
-                            "ofType": null
-                        },
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "questions",
-                        "description": null,
-                        "args": [
-                            {
-                                "name": "filter",
-                                "description": null,
-                                "type": {
-                                    "kind": "INPUT_OBJECT",
-                                    "name": "ModelQuestionFilterInput",
-                                    "ofType": null
-                                },
-                                "defaultValue": null,
-                                "isDeprecated": false,
-                                "deprecationReason": null
-                            },
-                            {
-                                "name": "sortDirection",
-                                "description": null,
-                                "type": {
-                                    "kind": "ENUM",
-                                    "name": "ModelSortDirection",
-                                    "ofType": null
-                                },
-                                "defaultValue": null,
-                                "isDeprecated": false,
-                                "deprecationReason": null
-                            },
-                            {
-                                "name": "limit",
-                                "description": null,
-                                "type": {
-                                    "kind": "SCALAR",
-                                    "name": "Int",
-                                    "ofType": null
-                                },
-                                "defaultValue": null,
-                                "isDeprecated": false,
-                                "deprecationReason": null
-                            },
-                            {
-                                "name": "nextToken",
-                                "description": null,
-                                "type": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                },
-                                "defaultValue": null,
-                                "isDeprecated": false,
-                                "deprecationReason": null
-                            }
-                        ],
-                        "type": {
-                            "kind": "OBJECT",
-                            "name": "ModelQuestionConnection",
-                            "ofType": null
-                        },
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
                         "name": "createdAt",
                         "description": null,
                         "args": [],
@@ -551,17 +394,6 @@
                 ],
                 "inputFields": null,
                 "interfaces": [],
-                "enumValues": null,
-                "possibleTypes": null
-            },
-            {
-                "kind": "SCALAR",
-                "name": "Int",
-                "description": "The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.",
-                "specifiedByUrl": null,
-                "fields": null,
-                "inputFields": null,
-                "interfaces": null,
                 "enumValues": null,
                 "possibleTypes": null
             },
@@ -833,128 +665,6 @@
                                 "name": "String",
                                 "ofType": null
                             }
-                        },
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "quizzes",
-                        "description": null,
-                        "args": [
-                            {
-                                "name": "filter",
-                                "description": null,
-                                "type": {
-                                    "kind": "INPUT_OBJECT",
-                                    "name": "ModelQuizFilterInput",
-                                    "ofType": null
-                                },
-                                "defaultValue": null,
-                                "isDeprecated": false,
-                                "deprecationReason": null
-                            },
-                            {
-                                "name": "sortDirection",
-                                "description": null,
-                                "type": {
-                                    "kind": "ENUM",
-                                    "name": "ModelSortDirection",
-                                    "ofType": null
-                                },
-                                "defaultValue": null,
-                                "isDeprecated": false,
-                                "deprecationReason": null
-                            },
-                            {
-                                "name": "limit",
-                                "description": null,
-                                "type": {
-                                    "kind": "SCALAR",
-                                    "name": "Int",
-                                    "ofType": null
-                                },
-                                "defaultValue": null,
-                                "isDeprecated": false,
-                                "deprecationReason": null
-                            },
-                            {
-                                "name": "nextToken",
-                                "description": null,
-                                "type": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                },
-                                "defaultValue": null,
-                                "isDeprecated": false,
-                                "deprecationReason": null
-                            }
-                        ],
-                        "type": {
-                            "kind": "OBJECT",
-                            "name": "ModelQuizConnection",
-                            "ofType": null
-                        },
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "history",
-                        "description": null,
-                        "args": [
-                            {
-                                "name": "filter",
-                                "description": null,
-                                "type": {
-                                    "kind": "INPUT_OBJECT",
-                                    "name": "ModelQuestionFilterInput",
-                                    "ofType": null
-                                },
-                                "defaultValue": null,
-                                "isDeprecated": false,
-                                "deprecationReason": null
-                            },
-                            {
-                                "name": "sortDirection",
-                                "description": null,
-                                "type": {
-                                    "kind": "ENUM",
-                                    "name": "ModelSortDirection",
-                                    "ofType": null
-                                },
-                                "defaultValue": null,
-                                "isDeprecated": false,
-                                "deprecationReason": null
-                            },
-                            {
-                                "name": "limit",
-                                "description": null,
-                                "type": {
-                                    "kind": "SCALAR",
-                                    "name": "Int",
-                                    "ofType": null
-                                },
-                                "defaultValue": null,
-                                "isDeprecated": false,
-                                "deprecationReason": null
-                            },
-                            {
-                                "name": "nextToken",
-                                "description": null,
-                                "type": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                },
-                                "defaultValue": null,
-                                "isDeprecated": false,
-                                "deprecationReason": null
-                            }
-                        ],
-                        "type": {
-                            "kind": "OBJECT",
-                            "name": "ModelQuestionConnection",
-                            "ofType": null
                         },
                         "isDeprecated": false,
                         "deprecationReason": null
@@ -1289,6 +999,17 @@
                         "deprecationReason": null
                     }
                 ],
+                "interfaces": null,
+                "enumValues": null,
+                "possibleTypes": null
+            },
+            {
+                "kind": "SCALAR",
+                "name": "Int",
+                "description": "The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.",
+                "specifiedByUrl": null,
+                "fields": null,
+                "inputFields": null,
                 "interfaces": null,
                 "enumValues": null,
                 "possibleTypes": null
@@ -2700,42 +2421,6 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "correctness",
-                        "description": null,
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "ModelBooleanInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "quizID",
-                        "description": null,
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "ModelIDInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "userID",
-                        "description": null,
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "ModelIDInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
                         "name": "and",
                         "description": null,
                         "type": {
@@ -3023,237 +2708,6 @@
                         },
                         "isDeprecated": false,
                         "deprecationReason": null
-                    },
-                    {
-                        "name": "questionsByQuizID",
-                        "description": null,
-                        "args": [
-                            {
-                                "name": "quizID",
-                                "description": null,
-                                "type": {
-                                    "kind": "NON_NULL",
-                                    "name": null,
-                                    "ofType": {
-                                        "kind": "SCALAR",
-                                        "name": "ID",
-                                        "ofType": null
-                                    }
-                                },
-                                "defaultValue": null,
-                                "isDeprecated": false,
-                                "deprecationReason": null
-                            },
-                            {
-                                "name": "sortDirection",
-                                "description": null,
-                                "type": {
-                                    "kind": "ENUM",
-                                    "name": "ModelSortDirection",
-                                    "ofType": null
-                                },
-                                "defaultValue": null,
-                                "isDeprecated": false,
-                                "deprecationReason": null
-                            },
-                            {
-                                "name": "filter",
-                                "description": null,
-                                "type": {
-                                    "kind": "INPUT_OBJECT",
-                                    "name": "ModelQuestionFilterInput",
-                                    "ofType": null
-                                },
-                                "defaultValue": null,
-                                "isDeprecated": false,
-                                "deprecationReason": null
-                            },
-                            {
-                                "name": "limit",
-                                "description": null,
-                                "type": {
-                                    "kind": "SCALAR",
-                                    "name": "Int",
-                                    "ofType": null
-                                },
-                                "defaultValue": null,
-                                "isDeprecated": false,
-                                "deprecationReason": null
-                            },
-                            {
-                                "name": "nextToken",
-                                "description": null,
-                                "type": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                },
-                                "defaultValue": null,
-                                "isDeprecated": false,
-                                "deprecationReason": null
-                            }
-                        ],
-                        "type": {
-                            "kind": "OBJECT",
-                            "name": "ModelQuestionConnection",
-                            "ofType": null
-                        },
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "questionsByUserID",
-                        "description": null,
-                        "args": [
-                            {
-                                "name": "userID",
-                                "description": null,
-                                "type": {
-                                    "kind": "NON_NULL",
-                                    "name": null,
-                                    "ofType": {
-                                        "kind": "SCALAR",
-                                        "name": "ID",
-                                        "ofType": null
-                                    }
-                                },
-                                "defaultValue": null,
-                                "isDeprecated": false,
-                                "deprecationReason": null
-                            },
-                            {
-                                "name": "sortDirection",
-                                "description": null,
-                                "type": {
-                                    "kind": "ENUM",
-                                    "name": "ModelSortDirection",
-                                    "ofType": null
-                                },
-                                "defaultValue": null,
-                                "isDeprecated": false,
-                                "deprecationReason": null
-                            },
-                            {
-                                "name": "filter",
-                                "description": null,
-                                "type": {
-                                    "kind": "INPUT_OBJECT",
-                                    "name": "ModelQuestionFilterInput",
-                                    "ofType": null
-                                },
-                                "defaultValue": null,
-                                "isDeprecated": false,
-                                "deprecationReason": null
-                            },
-                            {
-                                "name": "limit",
-                                "description": null,
-                                "type": {
-                                    "kind": "SCALAR",
-                                    "name": "Int",
-                                    "ofType": null
-                                },
-                                "defaultValue": null,
-                                "isDeprecated": false,
-                                "deprecationReason": null
-                            },
-                            {
-                                "name": "nextToken",
-                                "description": null,
-                                "type": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                },
-                                "defaultValue": null,
-                                "isDeprecated": false,
-                                "deprecationReason": null
-                            }
-                        ],
-                        "type": {
-                            "kind": "OBJECT",
-                            "name": "ModelQuestionConnection",
-                            "ofType": null
-                        },
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "quizzesByUserID",
-                        "description": null,
-                        "args": [
-                            {
-                                "name": "userID",
-                                "description": null,
-                                "type": {
-                                    "kind": "NON_NULL",
-                                    "name": null,
-                                    "ofType": {
-                                        "kind": "SCALAR",
-                                        "name": "ID",
-                                        "ofType": null
-                                    }
-                                },
-                                "defaultValue": null,
-                                "isDeprecated": false,
-                                "deprecationReason": null
-                            },
-                            {
-                                "name": "sortDirection",
-                                "description": null,
-                                "type": {
-                                    "kind": "ENUM",
-                                    "name": "ModelSortDirection",
-                                    "ofType": null
-                                },
-                                "defaultValue": null,
-                                "isDeprecated": false,
-                                "deprecationReason": null
-                            },
-                            {
-                                "name": "filter",
-                                "description": null,
-                                "type": {
-                                    "kind": "INPUT_OBJECT",
-                                    "name": "ModelQuizFilterInput",
-                                    "ofType": null
-                                },
-                                "defaultValue": null,
-                                "isDeprecated": false,
-                                "deprecationReason": null
-                            },
-                            {
-                                "name": "limit",
-                                "description": null,
-                                "type": {
-                                    "kind": "SCALAR",
-                                    "name": "Int",
-                                    "ofType": null
-                                },
-                                "defaultValue": null,
-                                "isDeprecated": false,
-                                "deprecationReason": null
-                            },
-                            {
-                                "name": "nextToken",
-                                "description": null,
-                                "type": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
-                                    "ofType": null
-                                },
-                                "defaultValue": null,
-                                "isDeprecated": false,
-                                "deprecationReason": null
-                            }
-                        ],
-                        "type": {
-                            "kind": "OBJECT",
-                            "name": "ModelQuizConnection",
-                            "ofType": null
-                        },
-                        "isDeprecated": false,
-                        "deprecationReason": null
                     }
                 ],
                 "inputFields": null,
@@ -3334,42 +2788,6 @@
                         "type": {
                             "kind": "INPUT_OBJECT",
                             "name": "ModelStringInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "correctness",
-                        "description": null,
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "ModelBooleanInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "quizID",
-                        "description": null,
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "ModelIDInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "userID",
-                        "description": null,
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "ModelIDInput",
                             "ofType": null
                         },
                         "defaultValue": null,
@@ -3519,50 +2937,6 @@
                         "defaultValue": null,
                         "isDeprecated": false,
                         "deprecationReason": null
-                    },
-                    {
-                        "name": "correctness",
-                        "description": null,
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "Boolean",
-                            "ofType": null
-                        },
-                        "defaultValue": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "quizID",
-                        "description": null,
-                        "type": {
-                            "kind": "NON_NULL",
-                            "name": null,
-                            "ofType": {
-                                "kind": "SCALAR",
-                                "name": "ID",
-                                "ofType": null
-                            }
-                        },
-                        "defaultValue": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "userID",
-                        "description": null,
-                        "type": {
-                            "kind": "NON_NULL",
-                            "name": null,
-                            "ofType": {
-                                "kind": "SCALAR",
-                                "name": "ID",
-                                "ofType": null
-                            }
-                        },
-                        "defaultValue": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
                     }
                 ],
                 "interfaces": null,
@@ -3663,42 +3037,6 @@
                                 "name": "String",
                                 "ofType": null
                             }
-                        },
-                        "defaultValue": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "correctness",
-                        "description": null,
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "Boolean",
-                            "ofType": null
-                        },
-                        "defaultValue": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "quizID",
-                        "description": null,
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "ID",
-                            "ofType": null
-                        },
-                        "defaultValue": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "userID",
-                        "description": null,
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "ID",
-                            "ofType": null
                         },
                         "defaultValue": null,
                         "isDeprecated": false,
@@ -4210,42 +3548,6 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "correctness",
-                        "description": null,
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "ModelSubscriptionBooleanInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "quizID",
-                        "description": null,
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "ModelSubscriptionIDInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "userID",
-                        "description": null,
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "ModelSubscriptionIDInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
                         "name": "and",
                         "description": null,
                         "type": {
@@ -4619,18 +3921,6 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "userID",
-                        "description": null,
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "ModelIDInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
                         "name": "and",
                         "description": null,
                         "type": {
@@ -4716,18 +4006,6 @@
                         "type": {
                             "kind": "INPUT_OBJECT",
                             "name": "ModelCategoryEnumInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "userID",
-                        "description": null,
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "ModelIDInput",
                             "ofType": null
                         },
                         "defaultValue": null,
@@ -4837,22 +4115,6 @@
                         "defaultValue": null,
                         "isDeprecated": false,
                         "deprecationReason": null
-                    },
-                    {
-                        "name": "userID",
-                        "description": null,
-                        "type": {
-                            "kind": "NON_NULL",
-                            "name": null,
-                            "ofType": {
-                                "kind": "SCALAR",
-                                "name": "ID",
-                                "ofType": null
-                            }
-                        },
-                        "defaultValue": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
                     }
                 ],
                 "interfaces": null,
@@ -4912,18 +4174,6 @@
                         "type": {
                             "kind": "ENUM",
                             "name": "CategoryEnum",
-                            "ofType": null
-                        },
-                        "defaultValue": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "userID",
-                        "description": null,
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "ID",
                             "ofType": null
                         },
                         "defaultValue": null,
@@ -5012,18 +4262,6 @@
                         "type": {
                             "kind": "INPUT_OBJECT",
                             "name": "ModelSubscriptionStringInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null,
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "userID",
-                        "description": null,
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "ModelSubscriptionIDInput",
                             "ofType": null
                         },
                         "defaultValue": null,
