@@ -5,15 +5,14 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+
 
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
 import com.study.quizzler.R;
-import com.study.quizzler.fragments.QuestionsFragment;
+
 import com.study.quizzler.listeners.NavigationItemSelectedListener;
 
 
@@ -29,7 +28,7 @@ public class HistoryPage extends AppCompatActivity {
         setContentView(R.layout.activity_history_page);
 
         drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_menu);
+        // navigationView = findViewById(R.id.nav_menu);
 
         // Initialize the ActionBarDrawerToggle
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
@@ -41,19 +40,6 @@ public class HistoryPage extends AppCompatActivity {
         // Set the custom NavigationItemSelectedListener
         NavigationItemSelectedListener navigationItemSelectedListener = new NavigationItemSelectedListener(this);
         navigationView.setNavigationItemSelectedListener(navigationItemSelectedListener);
-
-        // Create Fragment Instance
-        QuestionsFragment questionsFragment= new QuestionsFragment();
-
-        // Get Fragment Manager
-        FragmentManager fragmentManager = getSupportFragmentManager();
-
-        // Fragment Transaction
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        // Add the fragment to the container
-        fragmentTransaction.add(R.id.questionsFragmentFragment, questionsFragment);
-        fragmentTransaction.commit();
 
 
     }
