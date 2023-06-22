@@ -1,13 +1,15 @@
 {
   "api": {
-    "knowledgehub": {
+    "quizzler": {
       "dependsOn": [],
       "output": {
         "authConfig": {
           "additionalAuthenticationProviders": [],
           "defaultAuthentication": {
             "apiKeyConfig": {
-              "apiKeyExpirationDays": 7
+              "apiKeyExpirationDate": "2023-07-21T01:25:41.749Z",
+              "apiKeyExpirationDays": 30,
+              "description": ""
             },
             "authenticationType": "API_KEY"
           }
