@@ -29,11 +29,11 @@ public final class Quiz implements Model {
   public static final QueryField CATEGORY = field("Quiz", "category");
   public static final QueryField USER = field("Quiz", "userID");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  private final @ModelField(targetType="String") String numberQuestions;
+  private final @ModelField(targetType="Int") Integer numberQuestions;
   private final @ModelField(targetType="DifficultyEnum") DifficultyEnum difficulty;
   private final @ModelField(targetType="CategoryEnum") CategoryEnum category;
   private final @ModelField(targetType="QuizzlerUser") @BelongsTo(targetName = "userID", targetNames = {"userID"}, type = QuizzlerUser.class) QuizzlerUser user;
-  private final @ModelField(targetType="Question") @HasMany(associatedWith = "quiz", type = Question.class) List<Question> questions = null;
+  private final @ModelField(targetType="UserQuestion") @HasMany(associatedWith = "quiz", type = UserQuestion.class) List<UserQuestion> questions = null;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   public String resolveIdentifier() {
@@ -44,7 +44,7 @@ public final class Quiz implements Model {
       return id;
   }
   
-  public String getNumberQuestions() {
+  public Integer getNumberQuestions() {
       return numberQuestions;
   }
   
@@ -60,7 +60,7 @@ public final class Quiz implements Model {
       return user;
   }
   
-  public List<Question> getQuestions() {
+  public List<UserQuestion> getQuestions() {
       return questions;
   }
   
@@ -72,7 +72,7 @@ public final class Quiz implements Model {
       return updatedAt;
   }
   
-  private Quiz(String id, String numberQuestions, DifficultyEnum difficulty, CategoryEnum category, QuizzlerUser user) {
+  private Quiz(String id, Integer numberQuestions, DifficultyEnum difficulty, CategoryEnum category, QuizzlerUser user) {
     this.id = id;
     this.numberQuestions = numberQuestions;
     this.difficulty = difficulty;
@@ -159,7 +159,7 @@ public final class Quiz implements Model {
   public interface BuildStep {
     Quiz build();
     BuildStep id(String id);
-    BuildStep numberQuestions(String numberQuestions);
+    BuildStep numberQuestions(Integer numberQuestions);
     BuildStep difficulty(DifficultyEnum difficulty);
     BuildStep category(CategoryEnum category);
     BuildStep user(QuizzlerUser user);
@@ -168,7 +168,7 @@ public final class Quiz implements Model {
 
   public static class Builder implements BuildStep {
     private String id;
-    private String numberQuestions;
+    private Integer numberQuestions;
     private DifficultyEnum difficulty;
     private CategoryEnum category;
     private QuizzlerUser user;
@@ -185,7 +185,7 @@ public final class Quiz implements Model {
     }
     
     @Override
-     public BuildStep numberQuestions(String numberQuestions) {
+     public BuildStep numberQuestions(Integer numberQuestions) {
         this.numberQuestions = numberQuestions;
         return this;
     }
@@ -220,7 +220,7 @@ public final class Quiz implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String numberQuestions, DifficultyEnum difficulty, CategoryEnum category, QuizzlerUser user) {
+    private CopyOfBuilder(String id, Integer numberQuestions, DifficultyEnum difficulty, CategoryEnum category, QuizzlerUser user) {
       super.id(id);
       super.numberQuestions(numberQuestions)
         .difficulty(difficulty)
@@ -229,7 +229,7 @@ public final class Quiz implements Model {
     }
     
     @Override
-     public CopyOfBuilder numberQuestions(String numberQuestions) {
+     public CopyOfBuilder numberQuestions(Integer numberQuestions) {
       return (CopyOfBuilder) super.numberQuestions(numberQuestions);
     }
     

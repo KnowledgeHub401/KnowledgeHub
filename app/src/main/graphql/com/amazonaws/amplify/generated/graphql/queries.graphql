@@ -1,6 +1,6 @@
 # this is an auto generated file. This will be overwritten
-query GetQuestion($id: ID!) {
-  getQuestion(id: $id) {
+query GetUserQuestion($id: ID!) {
+  getUserQuestion(id: $id) {
     id
     category
     type
@@ -8,7 +8,18 @@ query GetQuestion($id: ID!) {
     question
     correct_answer
     incorrect_answers
-    correctness
+    answeredCorrectly
+    associatedQuestion {
+      id
+      category
+      type
+      difficulty
+      question
+      correct_answer
+      incorrect_answers
+      createdAt
+      updatedAt
+    }
     quizID
     quiz {
       id
@@ -51,12 +62,12 @@ query GetQuestion($id: ID!) {
     updatedAt
   }
 }
-query ListQuestions(
-  $filter: ModelQuestionFilterInput
+query ListUserQuestions(
+  $filter: ModelUserQuestionFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listQuestions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listUserQuestions(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
       category
@@ -65,7 +76,18 @@ query ListQuestions(
       question
       correct_answer
       incorrect_answers
-      correctness
+      answeredCorrectly
+      associatedQuestion {
+        id
+        category
+        type
+        difficulty
+        question
+        correct_answer
+        incorrect_answers
+        createdAt
+        updatedAt
+      }
       quizID
       quiz {
         id
@@ -86,6 +108,39 @@ query ListQuestions(
         createdAt
         updatedAt
       }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetQuestion($id: ID!) {
+  getQuestion(id: $id) {
+    id
+    category
+    type
+    difficulty
+    question
+    correct_answer
+    incorrect_answers
+    createdAt
+    updatedAt
+  }
+}
+query ListQuestions(
+  $filter: ModelQuestionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listQuestions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      category
+      type
+      difficulty
+      question
+      correct_answer
+      incorrect_answers
       createdAt
       updatedAt
     }
@@ -123,7 +178,7 @@ query GetQuiz($id: ID!) {
         question
         correct_answer
         incorrect_answers
-        correctness
+        answeredCorrectly
         quizID
         userID
         createdAt
@@ -193,7 +248,7 @@ query GetQuizzlerUser($id: ID!) {
         question
         correct_answer
         incorrect_answers
-        correctness
+        answeredCorrectly
         quizID
         userID
         createdAt
@@ -229,14 +284,14 @@ query ListQuizzlerUsers(
     nextToken
   }
 }
-query QuestionsByQuizID(
+query UserQuestionsByQuizID(
   $quizID: ID!
   $sortDirection: ModelSortDirection
-  $filter: ModelQuestionFilterInput
+  $filter: ModelUserQuestionFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  questionsByQuizID(
+  userQuestionsByQuizID(
     quizID: $quizID
     sortDirection: $sortDirection
     filter: $filter
@@ -251,7 +306,18 @@ query QuestionsByQuizID(
       question
       correct_answer
       incorrect_answers
-      correctness
+      answeredCorrectly
+      associatedQuestion {
+        id
+        category
+        type
+        difficulty
+        question
+        correct_answer
+        incorrect_answers
+        createdAt
+        updatedAt
+      }
       quizID
       quiz {
         id
@@ -278,14 +344,14 @@ query QuestionsByQuizID(
     nextToken
   }
 }
-query QuestionsByUserID(
+query UserQuestionsByUserID(
   $userID: ID!
   $sortDirection: ModelSortDirection
-  $filter: ModelQuestionFilterInput
+  $filter: ModelUserQuestionFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  questionsByUserID(
+  userQuestionsByUserID(
     userID: $userID
     sortDirection: $sortDirection
     filter: $filter
@@ -300,7 +366,18 @@ query QuestionsByUserID(
       question
       correct_answer
       incorrect_answers
-      correctness
+      answeredCorrectly
+      associatedQuestion {
+        id
+        category
+        type
+        difficulty
+        question
+        correct_answer
+        incorrect_answers
+        createdAt
+        updatedAt
+      }
       quizID
       quiz {
         id

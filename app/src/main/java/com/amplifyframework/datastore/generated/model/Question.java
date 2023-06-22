@@ -1,6 +1,5 @@
 package com.amplifyframework.datastore.generated.model;
 
-import com.amplifyframework.core.model.annotations.BelongsTo;
 import com.amplifyframework.core.model.temporal.Temporal;
 
 import java.util.List;
@@ -20,8 +19,6 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 /** This is an auto generated class representing the Question type in your schema. */
 @SuppressWarnings("all")
 @ModelConfig(pluralName = "Questions", type = Model.Type.USER, version = 1)
-@Index(name = "byQuiz", fields = {"quizID"})
-@Index(name = "byUser", fields = {"userID"})
 public final class Question implements Model {
   public static final QueryField ID = field("Question", "id");
   public static final QueryField CATEGORY = field("Question", "category");
@@ -30,19 +27,13 @@ public final class Question implements Model {
   public static final QueryField QUESTION = field("Question", "question");
   public static final QueryField CORRECT_ANSWER = field("Question", "correct_answer");
   public static final QueryField INCORRECT_ANSWERS = field("Question", "incorrect_answers");
-  public static final QueryField CORRECTNESS = field("Question", "correctness");
-  public static final QueryField QUIZ = field("Question", "quizID");
-  public static final QueryField USER = field("Question", "userID");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="CategoryEnum") CategoryEnum category;
-  private final @ModelField(targetType="Boolean") Boolean type;
+  private final @ModelField(targetType="String") String type;
   private final @ModelField(targetType="DifficultyEnum") DifficultyEnum difficulty;
   private final @ModelField(targetType="String") String question;
   private final @ModelField(targetType="String") String correct_answer;
   private final @ModelField(targetType="String") List<String> incorrect_answers;
-  private final @ModelField(targetType="Boolean") Boolean correctness;
-  private final @ModelField(targetType="Quiz") @BelongsTo(targetName = "quizID", targetNames = {"quizID"}, type = Quiz.class) Quiz quiz;
-  private final @ModelField(targetType="QuizzlerUser") @BelongsTo(targetName = "userID", targetNames = {"userID"}, type = QuizzlerUser.class) QuizzlerUser user;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   public String resolveIdentifier() {
@@ -57,7 +48,7 @@ public final class Question implements Model {
       return category;
   }
   
-  public Boolean getType() {
+  public String getType() {
       return type;
   }
   
@@ -77,18 +68,6 @@ public final class Question implements Model {
       return incorrect_answers;
   }
   
-  public Boolean getCorrectness() {
-      return correctness;
-  }
-  
-  public Quiz getQuiz() {
-      return quiz;
-  }
-  
-  public QuizzlerUser getUser() {
-      return user;
-  }
-  
   public Temporal.DateTime getCreatedAt() {
       return createdAt;
   }
@@ -97,7 +76,7 @@ public final class Question implements Model {
       return updatedAt;
   }
   
-  private Question(String id, CategoryEnum category, Boolean type, DifficultyEnum difficulty, String question, String correct_answer, List<String> incorrect_answers, Boolean correctness, Quiz quiz, QuizzlerUser user) {
+  private Question(String id, CategoryEnum category, String type, DifficultyEnum difficulty, String question, String correct_answer, List<String> incorrect_answers) {
     this.id = id;
     this.category = category;
     this.type = type;
@@ -105,9 +84,6 @@ public final class Question implements Model {
     this.question = question;
     this.correct_answer = correct_answer;
     this.incorrect_answers = incorrect_answers;
-    this.correctness = correctness;
-    this.quiz = quiz;
-    this.user = user;
   }
   
   @Override
@@ -125,9 +101,6 @@ public final class Question implements Model {
               ObjectsCompat.equals(getQuestion(), question.getQuestion()) &&
               ObjectsCompat.equals(getCorrectAnswer(), question.getCorrectAnswer()) &&
               ObjectsCompat.equals(getIncorrectAnswers(), question.getIncorrectAnswers()) &&
-              ObjectsCompat.equals(getCorrectness(), question.getCorrectness()) &&
-              ObjectsCompat.equals(getQuiz(), question.getQuiz()) &&
-              ObjectsCompat.equals(getUser(), question.getUser()) &&
               ObjectsCompat.equals(getCreatedAt(), question.getCreatedAt()) &&
               ObjectsCompat.equals(getUpdatedAt(), question.getUpdatedAt());
       }
@@ -143,9 +116,6 @@ public final class Question implements Model {
       .append(getQuestion())
       .append(getCorrectAnswer())
       .append(getIncorrectAnswers())
-      .append(getCorrectness())
-      .append(getQuiz())
-      .append(getUser())
       .append(getCreatedAt())
       .append(getUpdatedAt())
       .toString()
@@ -163,9 +133,6 @@ public final class Question implements Model {
       .append("question=" + String.valueOf(getQuestion()) + ", ")
       .append("correct_answer=" + String.valueOf(getCorrectAnswer()) + ", ")
       .append("incorrect_answers=" + String.valueOf(getIncorrectAnswers()) + ", ")
-      .append("correctness=" + String.valueOf(getCorrectness()) + ", ")
-      .append("quiz=" + String.valueOf(getQuiz()) + ", ")
-      .append("user=" + String.valueOf(getUser()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()))
       .append("}")
@@ -192,9 +159,6 @@ public final class Question implements Model {
       null,
       null,
       null,
-      null,
-      null,
-      null,
       null
     );
   }
@@ -206,37 +170,28 @@ public final class Question implements Model {
       difficulty,
       question,
       correct_answer,
-      incorrect_answers,
-      correctness,
-      quiz,
-      user);
+      incorrect_answers);
   }
   public interface BuildStep {
     Question build();
     BuildStep id(String id);
     BuildStep category(CategoryEnum category);
-    BuildStep type(Boolean type);
+    BuildStep type(String type);
     BuildStep difficulty(DifficultyEnum difficulty);
     BuildStep question(String question);
     BuildStep correctAnswer(String correctAnswer);
     BuildStep incorrectAnswers(List<String> incorrectAnswers);
-    BuildStep correctness(Boolean correctness);
-    BuildStep quiz(Quiz quiz);
-    BuildStep user(QuizzlerUser user);
   }
   
 
   public static class Builder implements BuildStep {
     private String id;
     private CategoryEnum category;
-    private Boolean type;
+    private String type;
     private DifficultyEnum difficulty;
     private String question;
     private String correct_answer;
     private List<String> incorrect_answers;
-    private Boolean correctness;
-    private Quiz quiz;
-    private QuizzlerUser user;
     @Override
      public Question build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -248,10 +203,7 @@ public final class Question implements Model {
           difficulty,
           question,
           correct_answer,
-          incorrect_answers,
-          correctness,
-          quiz,
-          user);
+          incorrect_answers);
     }
     
     @Override
@@ -261,7 +213,7 @@ public final class Question implements Model {
     }
     
     @Override
-     public BuildStep type(Boolean type) {
+     public BuildStep type(String type) {
         this.type = type;
         return this;
     }
@@ -290,24 +242,6 @@ public final class Question implements Model {
         return this;
     }
     
-    @Override
-     public BuildStep correctness(Boolean correctness) {
-        this.correctness = correctness;
-        return this;
-    }
-    
-    @Override
-     public BuildStep quiz(Quiz quiz) {
-        this.quiz = quiz;
-        return this;
-    }
-    
-    @Override
-     public BuildStep user(QuizzlerUser user) {
-        this.user = user;
-        return this;
-    }
-    
     /**
      * @param id id
      * @return Current Builder instance, for fluent method chaining
@@ -320,17 +254,14 @@ public final class Question implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, CategoryEnum category, Boolean type, DifficultyEnum difficulty, String question, String correctAnswer, List<String> incorrectAnswers, Boolean correctness, Quiz quiz, QuizzlerUser user) {
+    private CopyOfBuilder(String id, CategoryEnum category, String type, DifficultyEnum difficulty, String question, String correctAnswer, List<String> incorrectAnswers) {
       super.id(id);
       super.category(category)
         .type(type)
         .difficulty(difficulty)
         .question(question)
         .correctAnswer(correctAnswer)
-        .incorrectAnswers(incorrectAnswers)
-        .correctness(correctness)
-        .quiz(quiz)
-        .user(user);
+        .incorrectAnswers(incorrectAnswers);
     }
     
     @Override
@@ -339,7 +270,7 @@ public final class Question implements Model {
     }
     
     @Override
-     public CopyOfBuilder type(Boolean type) {
+     public CopyOfBuilder type(String type) {
       return (CopyOfBuilder) super.type(type);
     }
     
@@ -361,21 +292,6 @@ public final class Question implements Model {
     @Override
      public CopyOfBuilder incorrectAnswers(List<String> incorrectAnswers) {
       return (CopyOfBuilder) super.incorrectAnswers(incorrectAnswers);
-    }
-    
-    @Override
-     public CopyOfBuilder correctness(Boolean correctness) {
-      return (CopyOfBuilder) super.correctness(correctness);
-    }
-    
-    @Override
-     public CopyOfBuilder quiz(Quiz quiz) {
-      return (CopyOfBuilder) super.quiz(quiz);
-    }
-    
-    @Override
-     public CopyOfBuilder user(QuizzlerUser user) {
-      return (CopyOfBuilder) super.user(user);
     }
   }
   
