@@ -9,7 +9,6 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.amplifyframework.datastore.generated.model.Question;
 import com.study.quizzler.R;
 import com.study.quizzler.activities.Quiz;
 

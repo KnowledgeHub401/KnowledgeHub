@@ -16,8 +16,7 @@ type Question @model {
   correctness: Boolean
   quizID: ID! @index(name: "byQuiz")
   quiz: Quiz @belongsTo(fields: ["quizID"])
-  userID: ID! @index(name: "byUser")
-  user: QuizzlerUser @belongsTo(fields: ["userID"])
+
 }
 
 
@@ -73,7 +72,7 @@ type QuizzlerUser @model {
   name: String!
   email: String!
   quizzes: [Quiz] @hasMany(indexName: "byUser", fields: ["id"])
-  history: [Question] @hasMany(indexName: "byUser", fields: ["id"])
+  history: [Question]
 }
 
 #type UserQuestions {
