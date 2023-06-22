@@ -1,5 +1,17 @@
 package com.study.quizzler;
 
+
+
+import static com.amplifyframework.core.Amplify.Auth;
+
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
+
+import android.util.Log;
+import android.view.MenuItem;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,13 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-
-import com.amplifyframework.core.Amplify;
-import com.amplifyframework.datastore.generated.model.CategoryEnum;
-import com.amplifyframework.datastore.generated.model.DifficultyEnum;
-import com.amplifyframework.datastore.generated.model.Question;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.data.PieData;
@@ -24,23 +30,9 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.google.android.material.navigation.NavigationView;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
 import com.study.quizzler.adapters.ButtonAdapter;
 import com.study.quizzler.helpers.GridSpacingItemDecoration;
 import com.study.quizzler.listeners.NavigationItemSelectedListener;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -65,13 +57,6 @@ public class MainActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-//        PopulateDatabase
-        try {
-            populateDatabase("trivia.json");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
 
         // Initialize RecyclerView
          recyclerView = findViewById(R.id.main_activity_recycler_view);
@@ -170,11 +155,13 @@ public class MainActivity extends AppCompatActivity  {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
+        } else if (item.getItemId() == R.id.navMenuLogoutButton) {
+            logoutCurrentUser();
+            return true;
+
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 
     @Override
     public void onBackPressed(){
@@ -318,6 +305,28 @@ public class MainActivity extends AppCompatActivity  {
         // Close the streams
         inputStreamReader.close();
         inputStream.close();
+    }
+
+    private void logoutCurrentUser() {
+        Amplify.Auth.signOut(
+                new Consumer<AuthSignOutResult>() {
+                    @Override
+                    public void accept(@NonNull AuthSignOutResult value) {
+                        MainActivity.this.runOnUiThread(() -> {
+                            Toast.makeText(MainActivity.this, "Logout Successful", Toast.LENGTH_SHORT).show();
+                            MainActivity.this.navigateToSignInPage();
+                        });
+                    }
+                }
+        );
+    }
+
+    private void navigateToSignInPage() {
+
+
+         Intent intent = new Intent(MainActivity.this, SignInPage.class);
+        startActivity(intent);
+        finish();
     }
 
 }

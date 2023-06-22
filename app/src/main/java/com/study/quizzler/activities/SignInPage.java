@@ -4,12 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.amplifyframework.core.Amplify;
+import com.study.quizzler.MainActivity;
 import com.study.quizzler.R;
 
 public class SignInPage extends AppCompatActivity {
@@ -47,21 +49,28 @@ public class SignInPage extends AppCompatActivity {
                     // Sign-in successful
                     runOnUiThread(() -> {
                         Toast.makeText(SignInPage.this, "Sign-in successful", Toast.LENGTH_SHORT).show();
-                        // You can navigate to another activity or perform additional actions here
+                        Log.i("Sign in success", result.toString());
+                        navigateToMainActivity();
                     });
                 },
                 error -> {
                     // Sign-in failed
                     runOnUiThread(() -> {
                         Toast.makeText(SignInPage.this, "Sign-in failed. Please try again.", Toast.LENGTH_SHORT).show();
-                        // You can display specific error messages or handle different error cases here
+                        Log.i("Sign up error", error.toString());
                     });
                 }
         );
     }
 
+   private void navigateToMainActivity() {
+        Intent intent = new Intent(SignInPage.this, MainActivity.class);
+       startActivity(intent);
+       finish();
+   }
+
     public void onSignUpClicked(View view) {
-        Intent intent = new Intent(this, SignUpPage.class);
+        Intent intent = new Intent(SignInPage.this, SignUpPage.class);
         startActivity(intent);
     }
 }
