@@ -74,10 +74,3 @@ type QuizzlerUser @model {
   quizzes: [Quiz] @hasMany(indexName: "byUser", fields: ["id"])
   history: [Question]
 }
-
-#type UserQuestions {
-#  id: ID!
-#  questionID: String
-#  correctness: Boolean
-#  question: Question.question
-#}

@@ -1,6 +1,7 @@
 package com.study.quizzler.adapters;
 
 import android.content.Intent;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,10 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ButtonView
         // Set the icon on the left side and center it
         holder.button.setCompoundDrawablesWithIntrinsicBounds(buttonIcon, 0, 0, 0);
         holder.button.setCompoundDrawablePadding(10); // Add padding between icon and text
+
+        // Set the button's gravity to center
+        holder.button.setGravity(Gravity.CENTER);
+
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
