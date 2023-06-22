@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.study.quizzler.R;
 import com.study.quizzler.fragments.QuestionsFragment;
@@ -43,6 +45,18 @@ public class Quiz extends AppCompatActivity {
         // Add the fragment to the container
         fragmentTransaction.add(R.id.questionsFragmentFragmentContainerView, questionsFragment);
         fragmentTransaction.commit();
+
+        questionsFragmentRecyclerViewSetUp();
+
+    }
+
+    // Grab Recycler View and set Layout
+    private void questionsFragmentRecyclerViewSetUp(){
+        RecyclerView questFragRecyclerView = findViewById(R.id.questionPageActivityQuestionsFragmentRecyclerView);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        questFragRecyclerView.setLayoutManager(layoutManager);
+
+
 
     }
 }
