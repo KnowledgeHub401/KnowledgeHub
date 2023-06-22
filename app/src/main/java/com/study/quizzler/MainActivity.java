@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //PopulateDatabase
+//        PopulateDatabase
         try {
             populateDatabase("trivia.json");
         } catch (IOException e) {
@@ -211,10 +211,16 @@ public class MainActivity extends AppCompatActivity  {
 
         buttonAdapter = new ButtonAdapter(buttonNames, buttonColors, buttonIcons);
         recyclerView.setAdapter(buttonAdapter);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.HORIZONTAL,false);
 
+        // Adjust the spanCount and spacing based on your desired layout
+        int spanCount = 2; // Number of columns
+        int spacing = getResources().getDimensionPixelSize(R.dimen.grid_spacing); // Adjust spacing value as needed
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, spanCount, GridLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(gridLayoutManager);
 
+        // Add item decoration to set spacing between items
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, true));
     }
 //    private void populateDataBase(String fileName) throws IOException, JSONException {
 //
@@ -287,9 +293,16 @@ public class MainActivity extends AppCompatActivity  {
                 incorrectAnswers.add(incorrectAnswerElement.getAsString());
             }
 
+            String typeValue;
+            if (type.equalsIgnoreCase("multiple") || type.equalsIgnoreCase("true")) {
+                typeValue = "multiple";
+            } else {
+                typeValue = "single";
+            }
+
             Question question = Question.builder()
                     .category(CategoryEnum.valueOf(category))
-                    .type(type.equals("multiple"))
+                    .type(typeValue)
                     .difficulty(DifficultyEnum.valueOf(difficulty))
                     .question(questionText)
                     .correctAnswer(correctAnswer)

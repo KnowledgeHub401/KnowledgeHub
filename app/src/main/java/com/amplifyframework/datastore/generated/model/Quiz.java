@@ -1,5 +1,7 @@
 package com.amplifyframework.datastore.generated.model;
 
+import com.amplifyframework.core.model.annotations.BelongsTo;
+import com.amplifyframework.core.model.annotations.HasMany;
 import com.amplifyframework.core.model.temporal.Temporal;
 
 import java.util.List;
@@ -19,15 +21,19 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 /** This is an auto generated class representing the Quiz type in your schema. */
 @SuppressWarnings("all")
 @ModelConfig(pluralName = "Quizzes", type = Model.Type.USER, version = 1)
+@Index(name = "byUser", fields = {"userID"})
 public final class Quiz implements Model {
   public static final QueryField ID = field("Quiz", "id");
   public static final QueryField NUMBER_QUESTIONS = field("Quiz", "numberQuestions");
   public static final QueryField DIFFICULTY = field("Quiz", "difficulty");
   public static final QueryField CATEGORY = field("Quiz", "category");
+  public static final QueryField USER = field("Quiz", "userID");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  private final @ModelField(targetType="String") String numberQuestions;
+  private final @ModelField(targetType="Int") Integer numberQuestions;
   private final @ModelField(targetType="DifficultyEnum") DifficultyEnum difficulty;
   private final @ModelField(targetType="CategoryEnum") CategoryEnum category;
+  private final @ModelField(targetType="QuizzlerUser") @BelongsTo(targetName = "userID", targetNames = {"userID"}, type = QuizzlerUser.class) QuizzlerUser user;
+  private final @ModelField(targetType="UserQuestion") @HasMany(associatedWith = "quiz", type = UserQuestion.class) List<UserQuestion> questions = null;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   public String resolveIdentifier() {
@@ -38,7 +44,7 @@ public final class Quiz implements Model {
       return id;
   }
   
-  public String getNumberQuestions() {
+  public Integer getNumberQuestions() {
       return numberQuestions;
   }
   
@@ -50,6 +56,14 @@ public final class Quiz implements Model {
       return category;
   }
   
+  public QuizzlerUser getUser() {
+      return user;
+  }
+  
+  public List<UserQuestion> getQuestions() {
+      return questions;
+  }
+  
   public Temporal.DateTime getCreatedAt() {
       return createdAt;
   }
@@ -58,11 +72,12 @@ public final class Quiz implements Model {
       return updatedAt;
   }
   
-  private Quiz(String id, String numberQuestions, DifficultyEnum difficulty, CategoryEnum category) {
+  private Quiz(String id, Integer numberQuestions, DifficultyEnum difficulty, CategoryEnum category, QuizzlerUser user) {
     this.id = id;
     this.numberQuestions = numberQuestions;
     this.difficulty = difficulty;
     this.category = category;
+    this.user = user;
   }
   
   @Override
@@ -77,6 +92,7 @@ public final class Quiz implements Model {
               ObjectsCompat.equals(getNumberQuestions(), quiz.getNumberQuestions()) &&
               ObjectsCompat.equals(getDifficulty(), quiz.getDifficulty()) &&
               ObjectsCompat.equals(getCategory(), quiz.getCategory()) &&
+              ObjectsCompat.equals(getUser(), quiz.getUser()) &&
               ObjectsCompat.equals(getCreatedAt(), quiz.getCreatedAt()) &&
               ObjectsCompat.equals(getUpdatedAt(), quiz.getUpdatedAt());
       }
@@ -89,6 +105,7 @@ public final class Quiz implements Model {
       .append(getNumberQuestions())
       .append(getDifficulty())
       .append(getCategory())
+      .append(getUser())
       .append(getCreatedAt())
       .append(getUpdatedAt())
       .toString()
@@ -103,6 +120,7 @@ public final class Quiz implements Model {
       .append("numberQuestions=" + String.valueOf(getNumberQuestions()) + ", ")
       .append("difficulty=" + String.valueOf(getDifficulty()) + ", ")
       .append("category=" + String.valueOf(getCategory()) + ", ")
+      .append("user=" + String.valueOf(getUser()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()))
       .append("}")
@@ -126,6 +144,7 @@ public final class Quiz implements Model {
       id,
       null,
       null,
+      null,
       null
     );
   }
@@ -134,22 +153,25 @@ public final class Quiz implements Model {
     return new CopyOfBuilder(id,
       numberQuestions,
       difficulty,
-      category);
+      category,
+      user);
   }
   public interface BuildStep {
     Quiz build();
     BuildStep id(String id);
-    BuildStep numberQuestions(String numberQuestions);
+    BuildStep numberQuestions(Integer numberQuestions);
     BuildStep difficulty(DifficultyEnum difficulty);
     BuildStep category(CategoryEnum category);
+    BuildStep user(QuizzlerUser user);
   }
   
 
   public static class Builder implements BuildStep {
     private String id;
-    private String numberQuestions;
+    private Integer numberQuestions;
     private DifficultyEnum difficulty;
     private CategoryEnum category;
+    private QuizzlerUser user;
     @Override
      public Quiz build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -158,11 +180,12 @@ public final class Quiz implements Model {
           id,
           numberQuestions,
           difficulty,
-          category);
+          category,
+          user);
     }
     
     @Override
-     public BuildStep numberQuestions(String numberQuestions) {
+     public BuildStep numberQuestions(Integer numberQuestions) {
         this.numberQuestions = numberQuestions;
         return this;
     }
@@ -179,6 +202,12 @@ public final class Quiz implements Model {
         return this;
     }
     
+    @Override
+     public BuildStep user(QuizzlerUser user) {
+        this.user = user;
+        return this;
+    }
+    
     /**
      * @param id id
      * @return Current Builder instance, for fluent method chaining
@@ -191,15 +220,16 @@ public final class Quiz implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String numberQuestions, DifficultyEnum difficulty, CategoryEnum category) {
+    private CopyOfBuilder(String id, Integer numberQuestions, DifficultyEnum difficulty, CategoryEnum category, QuizzlerUser user) {
       super.id(id);
       super.numberQuestions(numberQuestions)
         .difficulty(difficulty)
-        .category(category);
+        .category(category)
+        .user(user);
     }
     
     @Override
-     public CopyOfBuilder numberQuestions(String numberQuestions) {
+     public CopyOfBuilder numberQuestions(Integer numberQuestions) {
       return (CopyOfBuilder) super.numberQuestions(numberQuestions);
     }
     
@@ -211,6 +241,11 @@ public final class Quiz implements Model {
     @Override
      public CopyOfBuilder category(CategoryEnum category) {
       return (CopyOfBuilder) super.category(category);
+    }
+    
+    @Override
+     public CopyOfBuilder user(QuizzlerUser user) {
+      return (CopyOfBuilder) super.user(user);
     }
   }
   

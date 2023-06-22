@@ -1,4 +1,199 @@
 # this is an auto generated file. This will be overwritten
+subscription OnCreateUserQuestion(
+  $filter: ModelSubscriptionUserQuestionFilterInput
+) {
+  onCreateUserQuestion(filter: $filter) {
+    id
+    category
+    type
+    difficulty
+    question
+    correct_answer
+    incorrect_answers
+    answeredCorrectly
+    associatedQuestion {
+      id
+      category
+      type
+      difficulty
+      question
+      correct_answer
+      incorrect_answers
+      createdAt
+      updatedAt
+    }
+    quizID
+    quiz {
+      id
+      numberQuestions
+      difficulty
+      category
+      userID
+      user {
+        id
+        username
+        password
+        name
+        email
+        createdAt
+        updatedAt
+      }
+      questions {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    userID
+    user {
+      id
+      username
+      password
+      name
+      email
+      quizzes {
+        nextToken
+      }
+      history {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateUserQuestion(
+  $filter: ModelSubscriptionUserQuestionFilterInput
+) {
+  onUpdateUserQuestion(filter: $filter) {
+    id
+    category
+    type
+    difficulty
+    question
+    correct_answer
+    incorrect_answers
+    answeredCorrectly
+    associatedQuestion {
+      id
+      category
+      type
+      difficulty
+      question
+      correct_answer
+      incorrect_answers
+      createdAt
+      updatedAt
+    }
+    quizID
+    quiz {
+      id
+      numberQuestions
+      difficulty
+      category
+      userID
+      user {
+        id
+        username
+        password
+        name
+        email
+        createdAt
+        updatedAt
+      }
+      questions {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    userID
+    user {
+      id
+      username
+      password
+      name
+      email
+      quizzes {
+        nextToken
+      }
+      history {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteUserQuestion(
+  $filter: ModelSubscriptionUserQuestionFilterInput
+) {
+  onDeleteUserQuestion(filter: $filter) {
+    id
+    category
+    type
+    difficulty
+    question
+    correct_answer
+    incorrect_answers
+    answeredCorrectly
+    associatedQuestion {
+      id
+      category
+      type
+      difficulty
+      question
+      correct_answer
+      incorrect_answers
+      createdAt
+      updatedAt
+    }
+    quizID
+    quiz {
+      id
+      numberQuestions
+      difficulty
+      category
+      userID
+      user {
+        id
+        username
+        password
+        name
+        email
+        createdAt
+        updatedAt
+      }
+      questions {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    userID
+    user {
+      id
+      username
+      password
+      name
+      email
+      quizzes {
+        nextToken
+      }
+      history {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
 subscription OnCreateQuestion($filter: ModelSubscriptionQuestionFilterInput) {
   onCreateQuestion(filter: $filter) {
     id
@@ -44,6 +239,39 @@ subscription OnCreateQuiz($filter: ModelSubscriptionQuizFilterInput) {
     numberQuestions
     difficulty
     category
+    userID
+    user {
+      id
+      username
+      password
+      name
+      email
+      quizzes {
+        nextToken
+      }
+      history {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    questions {
+      items {
+        id
+        category
+        type
+        difficulty
+        question
+        correct_answer
+        incorrect_answers
+        answeredCorrectly
+        quizID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
@@ -54,6 +282,39 @@ subscription OnUpdateQuiz($filter: ModelSubscriptionQuizFilterInput) {
     numberQuestions
     difficulty
     category
+    userID
+    user {
+      id
+      username
+      password
+      name
+      email
+      quizzes {
+        nextToken
+      }
+      history {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    questions {
+      items {
+        id
+        category
+        type
+        difficulty
+        question
+        correct_answer
+        incorrect_answers
+        answeredCorrectly
+        quizID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
@@ -64,6 +325,39 @@ subscription OnDeleteQuiz($filter: ModelSubscriptionQuizFilterInput) {
     numberQuestions
     difficulty
     category
+    userID
+    user {
+      id
+      username
+      password
+      name
+      email
+      quizzes {
+        nextToken
+      }
+      history {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    questions {
+      items {
+        id
+        category
+        type
+        difficulty
+        question
+        correct_answer
+        incorrect_answers
+        answeredCorrectly
+        quizID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
@@ -77,6 +371,35 @@ subscription OnCreateQuizzlerUser(
     password
     name
     email
+    quizzes {
+      items {
+        id
+        numberQuestions
+        difficulty
+        category
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    history {
+      items {
+        id
+        category
+        type
+        difficulty
+        question
+        correct_answer
+        incorrect_answers
+        answeredCorrectly
+        quizID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
@@ -90,6 +413,35 @@ subscription OnUpdateQuizzlerUser(
     password
     name
     email
+    quizzes {
+      items {
+        id
+        numberQuestions
+        difficulty
+        category
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    history {
+      items {
+        id
+        category
+        type
+        difficulty
+        question
+        correct_answer
+        incorrect_answers
+        answeredCorrectly
+        quizID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
@@ -103,6 +455,35 @@ subscription OnDeleteQuizzlerUser(
     password
     name
     email
+    quizzes {
+      items {
+        id
+        numberQuestions
+        difficulty
+        category
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    history {
+      items {
+        id
+        category
+        type
+        difficulty
+        question
+        correct_answer
+        incorrect_answers
+        answeredCorrectly
+        quizID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }

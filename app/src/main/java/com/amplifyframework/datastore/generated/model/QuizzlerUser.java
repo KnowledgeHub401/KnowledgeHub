@@ -1,5 +1,6 @@
 package com.amplifyframework.datastore.generated.model;
 
+import com.amplifyframework.core.model.annotations.HasMany;
 import com.amplifyframework.core.model.temporal.Temporal;
 
 import java.util.List;
@@ -30,6 +31,8 @@ public final class QuizzlerUser implements Model {
   private final @ModelField(targetType="String", isRequired = true) String password;
   private final @ModelField(targetType="String", isRequired = true) String name;
   private final @ModelField(targetType="String", isRequired = true) String email;
+  private final @ModelField(targetType="Quiz") @HasMany(associatedWith = "user", type = Quiz.class) List<Quiz> quizzes = null;
+  private final @ModelField(targetType="UserQuestion") @HasMany(associatedWith = "user", type = UserQuestion.class) List<UserQuestion> history = null;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   public String resolveIdentifier() {
@@ -54,6 +57,14 @@ public final class QuizzlerUser implements Model {
   
   public String getEmail() {
       return email;
+  }
+  
+  public List<Quiz> getQuizzes() {
+      return quizzes;
+  }
+  
+  public List<UserQuestion> getHistory() {
+      return history;
   }
   
   public Temporal.DateTime getCreatedAt() {
