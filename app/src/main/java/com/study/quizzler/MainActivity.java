@@ -20,14 +20,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.amplifyframework.auth.AuthException;
-import com.amplifyframework.auth.result.AuthSignOutResult;
-import com.amplifyframework.core.Amplify;
-import com.amplifyframework.AmplifyException;
-import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
-
-import com.amplifyframework.core.Consumer;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.MenuItem;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.data.PieData;
@@ -35,16 +30,15 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.google.android.material.navigation.NavigationView;
-import com.study.quizzler.activities.SignInPage;
 import com.study.quizzler.adapters.ButtonAdapter;
+import com.study.quizzler.helpers.GridSpacingItemDecoration;
 import com.study.quizzler.listeners.NavigationItemSelectedListener;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity  {
-
+    private static final String TAG = "MainActivity";
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private ActionBarDrawerToggle drawerToggle;
@@ -58,19 +52,18 @@ public class MainActivity extends AppCompatActivity  {
     private List<Integer> buttonIcons;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-      Auth.fetchAuthSession(
-              result -> Log.i("AmplifyQuickstart", result.toString()),
-              error -> Log.e("AmplifyQuickstart", error.toString())
-      );
-
         // Initialize RecyclerView
          recyclerView = findViewById(R.id.main_activity_recycler_view);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+//        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+
         recyclerView.setLayoutManager(layoutManager);
         setupRecyclerView();
 
@@ -205,8 +198,113 @@ public class MainActivity extends AppCompatActivity  {
 
         buttonAdapter = new ButtonAdapter(buttonNames, buttonColors, buttonIcons);
         recyclerView.setAdapter(buttonAdapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
+        // Adjust the spanCount and spacing based on your desired layout
+        int spanCount = 2; // Number of columns
+        int spacing = getResources().getDimensionPixelSize(R.dimen.grid_spacing); // Adjust spacing value as needed
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, spanCount, GridLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(gridLayoutManager);
+
+        // Add item decoration to set spacing between items
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, true));
+    }
+//    private void populateDataBase(String fileName) throws IOException, JSONException {
+//
+//        //Reads file
+//        InputStream inputStream = getAssets().open(fileName);
+//        int size = inputStream.available();
+//        byte[] buffer = new byte[size];
+//        inputStream.read(buffer);
+//        inputStream.close();
+//        String jsonString = new String(buffer, StandardCharsets.UTF_8);
+//
+//        JSONArray jsonArray = new JSONArray(jsonString);
+
+//        for (int i = 0; i < jsonArray.length(); i++) {
+//            JSONObject jsonObject = jsonArray.getJSONObject(i);
+//            String category = jsonObject.getString("category");
+//            CategoryEnum categoryEnum = CategoryEnum.valueOf(category);
+//            String type = jsonObject.getString("type");
+//            Boolean typeBool = Boolean.parseBoolean(type);
+//            String difficulty = jsonObject.getString("difficulty");
+//            DifficultyEnum difficultyEnum = DifficultyEnum.valueOf(difficulty);
+//            String question = jsonObject.getString("question");
+//            String correctAnswer = jsonObject.getString("correct_answer");
+//
+//            JSONArray incorrectAnswersJSONArray = new JSONArray(jsonObject.getString("question"));
+//            List<String> incorrectAnswersList = new ArrayList();
+//
+//            for (int j = 0; j < incorrectAnswersJSONArray.length(); j++) {
+//                incorrectAnswersList.add(incorrectAnswersJSONArray.getString(j));
+//            }
+//
+//            // Create a new TriviaQuestion object
+//            Question triviaQuestion = Question.builder()
+//                    .category(categoryEnum)
+//                    .type(typeBool)
+//                    .difficulty(difficultyEnum)
+//                    .question(question)
+//                    .correctAnswer(correctAnswer)
+//                    .incorrectAnswers(incorrectAnswersList)
+//                    .build();
+//
+//            // Save the TriviaQuestion object to DynamoDB
+//            Amplify.DataStore.save(triviaQuestion,
+//                    success -> Log.i(TAG, "Saved TriviaQuestion: " + success.item().getId()),
+//                    error -> Log.e(TAG, "Failed to save TriviaQuestion: " + error)
+//            );
+//        }
+
+    private void populateDatabase(String fileName) throws IOException {
+        // Read file
+        InputStream inputStream = getAssets().open(fileName);
+        InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+
+        // Use Gson to parse JSON data
+        Gson gson = new Gson();
+        JsonObject jsonObject = gson.fromJson(inputStreamReader, JsonObject.class);
+        JsonArray resultsArray = jsonObject.getAsJsonArray("results");
+
+        // Save the Question objects to DynamoDB
+        for (JsonElement element : resultsArray) {
+            JsonObject questionObject = element.getAsJsonObject();
+            String category = questionObject.get("category").getAsString();
+            String type = questionObject.get("type").getAsString();
+            String difficulty = questionObject.get("difficulty").getAsString();
+            String questionText = questionObject.get("question").getAsString();
+            String correctAnswer = questionObject.get("correct_answer").getAsString();
+            JsonArray incorrectAnswersArray = questionObject.getAsJsonArray("incorrect_answers");
+            List<String> incorrectAnswers = new ArrayList<>();
+            for (JsonElement incorrectAnswerElement : incorrectAnswersArray) {
+                incorrectAnswers.add(incorrectAnswerElement.getAsString());
+            }
+
+            String typeValue;
+            if (type.equalsIgnoreCase("multiple") || type.equalsIgnoreCase("true")) {
+                typeValue = "multiple";
+            } else {
+                typeValue = "single";
+            }
+
+            Question question = Question.builder()
+                    .category(CategoryEnum.valueOf(category))
+                    .type(typeValue)
+                    .difficulty(DifficultyEnum.valueOf(difficulty))
+                    .question(questionText)
+                    .correctAnswer(correctAnswer)
+                    .incorrectAnswers(incorrectAnswers)
+                    .build();
+
+            Amplify.DataStore.save(question,
+                    success -> Log.i(TAG, "Saved Question: " + success.item().getId()),
+                    error -> Log.e(TAG, "Failed to save Question: " + error)
+            );
+        }
+
+        // Close the streams
+        inputStreamReader.close();
+        inputStream.close();
     }
 
     private void logoutCurrentUser() {
