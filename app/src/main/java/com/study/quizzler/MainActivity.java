@@ -1,17 +1,9 @@
 package com.study.quizzler;
-
-
-
-import static com.amplifyframework.core.Amplify.Auth;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,16 +12,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.view.MenuItem;
-
 import com.amplifyframework.auth.result.AuthSignOutResult;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.core.Consumer;
-import com.amplifyframework.datastore.generated.model.CategoryEnum;
-import com.amplifyframework.datastore.generated.model.DifficultyEnum;
-import com.amplifyframework.datastore.generated.model.Question;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.data.PieData;
@@ -37,19 +22,10 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.google.android.material.navigation.NavigationView;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.study.quizzler.activities.SignInPage;
 import com.study.quizzler.adapters.ButtonAdapter;
 import com.study.quizzler.helpers.GridSpacingItemDecoration;
 import com.study.quizzler.listeners.NavigationItemSelectedListener;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

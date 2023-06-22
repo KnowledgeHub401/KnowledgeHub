@@ -38,9 +38,9 @@ public final class UserQuestion implements Model {
   private final @ModelField(targetType="String") String type;
   private final @ModelField(targetType="DifficultyEnum") DifficultyEnum difficulty;
   private final @ModelField(targetType="String") String question;
-  private final @ModelField(targetType="String") String correct_answer;
+  public final @ModelField(targetType="String") String correct_answer;
   private final @ModelField(targetType="String") List<String> incorrect_answers;
-  private final @ModelField(targetType="Boolean") Boolean answeredCorrectly;
+  public @ModelField(targetType="Boolean") Boolean answeredCorrectly;
   private final @ModelField(targetType="Quiz") @BelongsTo(targetName = "quizID", targetNames = {"quizID"}, type = Quiz.class) Quiz quiz;
   private final @ModelField(targetType="QuizzlerUser") @BelongsTo(targetName = "userID", targetNames = {"userID"}, type = QuizzlerUser.class) QuizzlerUser user;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
