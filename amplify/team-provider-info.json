@@ -19,5 +19,26 @@
         "knowledgehub367ebdb5": {}
       }
     }
+  },
+  "newdev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-quizzler-newdev-212133-authRole",
+      "UnauthRoleArn": "arn:aws:iam::612998444197:role/amplify-quizzler-newdev-212133-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::612998444197:role/amplify-quizzler-newdev-212133-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-quizzler-newdev-212133-deployment",
+      "UnauthRoleName": "amplify-quizzler-newdev-212133-unauthRole",
+      "StackName": "amplify-quizzler-newdev-212133",
+      "StackId": "arn:aws:cloudformation:us-east-2:612998444197:stack/amplify-quizzler-newdev-212133/4ac9b940-1164-11ee-812c-06e9dbebd305",
+      "AmplifyAppId": "d9vqdhg4oagc9"
+    },
+    "categories": {
+      "auth": {
+        "knowledgehub367ebdb5": {}
+      },
+      "api": {
+        "knowledgehub": {}
+      }
+    }
   }
 }
