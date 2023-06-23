@@ -1,5 +1,7 @@
 package com.study.quizzler.activities;
 
+import static java.util.Map.of;
+
 import android.os.Bundle;
 import android.util.Log;
 
@@ -7,19 +9,37 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.amplifyframework.api.graphql.model.ModelPagination;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.CategoryEnum;
+import com.amplifyframework.datastore.generated.model.DifficultyEnum;
+import com.amplifyframework.datastore.generated.model.Question;
 import com.amplifyframework.datastore.generated.model.UserQuestion;
 import com.study.quizzler.R;
 import com.study.quizzler.fragments.QuestionsFragment;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+
+import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
+import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
+import software.amazon.awssdk.services.dynamodb.model.QueryRequest;
+import software.amazon.awssdk.services.dynamodb.model.QueryResponse;
+
 
 public class Quiz extends AppCompatActivity {
     private static final String TAG = "Quiz";
+
+    String selected;
+
+
+    List<UserQuestion> quizQuestions = new ArrayList<>();
+    Map<String, UserQuestion> userQuestionMap = new HashMap<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,25 +59,78 @@ public class Quiz extends AppCompatActivity {
 
     }
 
-//    protected void onResume() {
-//        super.onResume();
-//
-//        List<UserQuestion> quizQuestions = new ArrayList<>();
-//
-//        Map<String, UserQuestion> userQuestionMap = new HashMap<>();
-//        Amplify.API.query(
-//                ModelQuery.list(UserQuestion.class),
-//                success -> {
-//
-//                    for(UserQuestion question : success.getData()){
-//                        userQuestionMap.put(question.getID(), question);
-//                    }
-//                },
-//                failure -> {
-//                    Log.i(TAG,"Did not read tasks successfully");
-//                }
-//        );
-//
+    protected void onResume() {
+        super.onResume();
+        getQuestions();
+
+
+
+
+
+    }
+
+    protected void getQuestions() {
+        Amplify.API.query(
+                ModelQuery.list(UserQuestion.class),
+                success -> {
+
+                    for(UserQuestion question : success.getData()){
+                        userQuestionMap.put(question.getId(), question);
+                    }
+                },
+                failure -> {
+                    Log.i(TAG,"Did not read questions successfully");
+                }
+        );
+
+        if (selected.equals("all")) {
+            Amplify.API.query(
+                    ModelQuery.list(Question.class, ModelPagination.limit(10)),
+                    response -> {
+                        Collections.shuffle(Collections.singletonList(response.getData()));
+                        for (Question question : response.getData()) {
+                            if (userQuestionMap.containsKey(question.getId())) {
+                                quizQuestions.add(userQuestionMap.get(question.getId()));
+                            } else {
+                                UserQuestion userQuestion = UserQuestion.builder()
+                                        .category(question.getCategory())
+                                        .type(question.getType())
+                                        .difficulty(question.getDifficulty())
+                                        .question(question.getQuestion())
+                                        .correctAnswer(question.getCorrectAnswer())
+                                        .incorrectAnswers(question.getIncorrectAnswers())
+                                        .build();
+                                quizQuestions.add(userQuestion);
+                            }
+                        }
+
+                    },
+                    error -> Log.e("MyAmplifyApp", "Query failure", error)
+            );
+        } else {
+            Amplify.API.query(
+                    ModelQuery.list(Question.class, Question.CATEGORY.contains(selected), ModelPagination.limit(10)),
+                    response -> {
+                        Collections.shuffle(Collections.singletonList(response.getData()));
+                        for (Question question : response.getData()) {
+                            if (userQuestionMap.containsKey(question.getId())) {
+                                quizQuestions.add(userQuestionMap.get(question.getId()));
+                            } else {
+                                UserQuestion userQuestion = UserQuestion.builder()
+                                        .category(question.getCategory())
+                                        .type(question.getType())
+                                        .difficulty(question.getDifficulty())
+                                        .question(question.getQuestion())
+                                        .correctAnswer(question.getCorrectAnswer())
+                                        .incorrectAnswers(question.getIncorrectAnswers())
+                                        .build();
+                                quizQuestions.add(userQuestion);
+                            }
+                        }
+
+                    },
+                    error -> Log.e("MyAmplifyApp", "Query failure", error));
+        }
 //        DynamoDbClient dynamoDbClient = DynamoDbClient.create();
 //        // Specify the table name
 //        String tableName = "YourTableName";
@@ -71,33 +144,40 @@ public class Quiz extends AppCompatActivity {
 //        QueryRequest queryRequest = QueryRequest.builder()
 //                .tableName(tableName)
 //                .keyConditionExpression("#pk = :offset")
-//                .expressionAttributeNames(Map.of("#pk", "your_partition_key"))
+//                .expressionAttributeNames(Collections.singletonMap("#pk", "your_partition_key"))
 //                .expressionAttributeValues(expressionAttributeValues)
 //                .limit(itemCount)
 //                .build();
+
 //        // Execute the query
 //        QueryResponse queryResponse = dynamoDbClient.query(queryRequest);
 //        // Process the query results
 //        for (Map<String, AttributeValue> item : queryResponse.items()) {
 //            // Process each item as needed
 //            if (userQuestionMap.containsKey(item.get("id"))){
-//                quizQuestions.add(userQuestionMap.get(question.getQuestion()));
+//                quizQuestions.add(userQuestionMap.get(item.get("id")));
 //            }
 //            else {
-//                UserQuestion userQuestion = new UserQuestion.builder()
-//                        .category(item.get("category")
-//                                .type(item.get("type"))
-//                                .difficulty(item.get("difficulty"))
-//                                .question(item.get("question"))
-//                                .incorrect_answers(item.get("incorrect_answers"))
-//                        );
+//                List<String> incorrectAnswers = new ArrayList<>();
+//                List<AttributeValue> incorrectAnswersAttributeList = item.get("incorrect_answers").l();
+//                for (AttributeValue attributeValue : incorrectAnswersAttributeList) {
+//                    incorrectAnswers.add(attributeValue.s());
+//                }
+//
+//                UserQuestion userQuestion = UserQuestion.builder()
+//                        .category((CategoryEnum.valueOf(item.get("category").s())))
+//                        .type(item.get("type").s())
+//                        .difficulty((DifficultyEnum.valueOf(item.get("difficulty").s())))
+//                        .question(item.get("question").s())
+//                        .correctAnswer(item.get("correct_answer").s())
+//                        .incorrectAnswers(incorrectAnswers)
+//                        .build();
 //                quizQuestions.add(userQuestion);
 //            }
 //        }
-//
-//    }
-//
-//    public void submitQuiz() {
+    }
+
+//    public void submitQuiz () {
 //        submitButton.setOnClickListener(v -> {
 //            for (UserQuestion question : quizQuestions) {
 //                if (question.correct_answer == selected){
@@ -105,13 +185,10 @@ public class Quiz extends AppCompatActivity {
 //                } else {
 //                    question.answeredCorrectly = false;
 //                }
-//
+//                Amplify.DataStore.save(question,
+//                        success -> Log.i(TAG, "Saved TriviaQuestion: " + success.item().getId()),
+//                        error -> Log.e(TAG, "Failed to save TriviaQuestion: " + error));
 //            }
-//            Amplify.DataStore.save(question,
-//                    success -> Log.i(TAG, "Saved TriviaQuestion: " + success.item().getId()),
-//                    error -> Log.e(TAG, "Failed to save TriviaQuestion: " + error)
-//            );
 //        });
 //    }
-
 }

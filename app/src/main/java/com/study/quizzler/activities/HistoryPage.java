@@ -8,13 +8,25 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Button;
 
+import com.amplifyframework.api.graphql.model.ModelPagination;
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Question;
+import com.amplifyframework.datastore.generated.model.UserQuestion;
 import com.google.android.material.navigation.NavigationView;
 import com.study.quizzler.R;
 import com.study.quizzler.fragments.QuestionsFragment;
 import com.study.quizzler.listeners.NavigationItemSelectedListener;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
 public class HistoryPage extends AppCompatActivity {
@@ -22,6 +34,9 @@ public class HistoryPage extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private ActionBarDrawerToggle drawerToggle;
+
+    String selected;
+    List<UserQuestion> userHistory = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +71,30 @@ public class HistoryPage extends AppCompatActivity {
         fragmentTransaction.commit();
 
 
+
+
+    }
+
+    protected void onResume() {
+        super.onResume();
+        userHistory.clear();
+        getUserQuestions();
+    }
+
+    public void setUpCorrectAnswersButton () {
+        Button correctAnswersButton = (Button) findViewById(R.id.historyActivityCorrectAnswersButton);
+        correctAnswersButton.setOnClickListener(v -> {
+            selected = "true";
+            getUserQuestions();
+        });
+    }
+
+    public void setUpIncorrectAnswersButton () {
+        Button correctAnswersButton = (Button) findViewById(R.id.historyActivityIncorrectAnswersButton);
+        correctAnswersButton.setOnClickListener(v -> {
+            selected = "false";
+            getUserQuestions();
+        });
     }
 
     @Override
@@ -74,6 +113,30 @@ public class HistoryPage extends AppCompatActivity {
             drawerLayout.closeDrawer(GravityCompat.START);
         }else{
             super.onBackPressed();
+        }
+    }
+
+    void getUserQuestions() {
+        if (selected.equals("all")) {
+            Amplify.API.query(
+                    ModelQuery.list(UserQuestion.class),
+                    response -> {
+                        for (UserQuestion question : response.getData()) {
+                           userHistory.add(question);
+                        }
+                    },
+                    error -> Log.e("MyAmplifyApp", "Query failure", error)
+            );
+        } else {
+            Amplify.API.query(
+                    ModelQuery.list(UserQuestion.class, UserQuestion.ANSWERED_CORRECTLY.eq(Boolean.valueOf(selected))),
+                    response -> {
+                        for (UserQuestion question : response.getData()) {
+                            userHistory.add(question);
+                        }
+                    },
+                    error -> Log.e("MyAmplifyApp", "Query failure", error)
+            );
         }
     }
 }

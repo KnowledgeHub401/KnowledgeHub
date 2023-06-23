@@ -1,0 +1,90 @@
+
+type UserQuestion @model @auth(rules: [{allow: public}]) {
+    id: ID!
+    category: CategoryEnum
+    type: String
+    difficulty: DifficultyEnum
+    question: String
+    correct_answer: String
+    incorrect_answers: [String]
+    #  categoryObj: Question @connection(fields: ["category"])
+    #  typeObj: Question @connection(fields: ["type"])
+    #  difficultyObj: Question @connection(fields: ["difficulty"])
+    #  questionObj: Question @connection(fields: ["question"])
+    #  correct_answerObj: Question @connection(fields: ["correct_answer"])
+    #  incorrect_answersObj: Question @connection(fields: ["incorrect_answers"])
+    #  questionIDObj: String
+    answeredCorrectly: Boolean
+    associatedQuestion: Question
+    quizID: ID! @index(name: "byQuiz")
+    quiz: Quiz @belongsTo(fields: ["quizID"])
+    userID: ID! @index(name: "byUser")
+    user: QuizzlerUser @belongsTo(fields: ["userID"])
+}
+#Many to one relationship
+
+type Question @model @auth(rules: [{allow: public}]) {
+    id: ID!
+    category: CategoryEnum
+    type: String
+    difficulty: DifficultyEnum
+    question: String
+    correct_answer: String
+    incorrect_answers: [String]
+}
+
+
+type Quiz @model @auth(rules: [{allow: public}]) {
+    id: ID!
+    numberQuestions: Int
+    difficulty: DifficultyEnum
+    category: CategoryEnum
+    userID: ID! @index(name: "byUser")
+    user: QuizzlerUser @belongsTo(fields: ["userID"])
+    questions: [UserQuestion] @hasMany(indexName: "byQuiz", fields: ["id"])
+}
+
+enum CategoryEnum {
+    #  GeneralKnowledge
+    #  EntertainmentBooks
+    #  EntertainmentFilm
+    #  EntertainmentMusic
+    #  EntertainmentMusicalsTheaters
+    #  EntertainmentTelevision
+    #  EntertainmentVideoGames
+    #  EntertainmentBoardGames
+    #  ScienceAndNature
+    #  ScienceComputers
+    #  ScienceMathematics
+    Mythology
+    Sports
+    Geography
+    History
+    Politics
+    #  Art
+    Celebrities
+    Animals
+    Vehicles
+    #  EntertainmentComics
+    #  ScienceGadgets
+    #  EntertainmentJapaneseAnimeAndManga
+    #  EntertainmentCartoonAndAnimations
+}
+
+enum DifficultyEnum {
+    easy
+    medium
+    hard
+}
+
+#One-to-many relationship
+
+type QuizzlerUser @model @auth(rules: [{allow: public}]) {
+    id: ID!
+    username: String!
+    password: String!
+    name: String!
+    email: String!
+    quizzes: [Quiz] @hasMany(indexName: "byUser", fields: ["id"])
+    history: [UserQuestion] @hasMany(indexName: "byUser", fields: ["id"])
+}
