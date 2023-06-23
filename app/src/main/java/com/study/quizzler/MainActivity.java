@@ -2,7 +2,6 @@ package com.study.quizzler;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.auth.result.AuthSignOutResult;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.core.Consumer;
@@ -32,7 +30,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.study.quizzler.activities.SignInPage;
+import com.study.quizzler.activities.SignInPageActivity;
 import com.study.quizzler.adapters.ButtonAdapter;
 import com.study.quizzler.helpers.GridSpacingItemDecoration;
 import com.study.quizzler.listeners.NavigationItemSelectedListener;
@@ -42,7 +40,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity  {
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity  {
     private List<String> buttonNames;
     private List<Integer> buttonColors;
     private List<Integer> buttonIcons;
-
+    public static Map<Integer, Question> questions = new HashMap<>();
 
 
     @Override
@@ -85,19 +85,19 @@ public class MainActivity extends AppCompatActivity  {
         newValues.add(70.0f);
         updateChartData(newValues);
 
-        Question question = Question.builder()
-                .category(CategoryEnum.Animals)
-                .type("test")
-                .difficulty(DifficultyEnum.easy)
-                .question("test?")
-                .correctAnswer("test")
-                .incorrectAnswers(new ArrayList<>())
-                .build();
-
-        Amplify.API.mutate(ModelMutation.create(question),
-                response -> Log.i("MyAmplifyApp", "Todo with id: " + response.getData().getId()),
-                error -> Log.e("MyAmplifyApp", "Create failed", error)
-        );
+//        Question question = Question.builder()
+//                .category(CategoryEnum.Animals)
+//                .type("test")
+//                .difficulty(DifficultyEnum.easy)
+//                .question("test?")
+//                .correctAnswer("test")
+//                .incorrectAnswers(new ArrayList<>())
+//                .build();
+//
+//        Amplify.API.mutate(ModelMutation.create(question),
+//                response -> Log.i("MyAmplifyApp", "Todo with id: " + response.getData().getId()),
+//                error -> Log.e("MyAmplifyApp", "Create failed", error)
+//        );
 
 //            try {
 //                populateDatabase("trivia.json");
@@ -200,10 +200,10 @@ public class MainActivity extends AppCompatActivity  {
     }
     private void setupRecyclerView() {
         buttonNames = new ArrayList<>();
+        buttonNames.add("All");
         buttonNames.add("Sports");
         buttonNames.add("Cmp Sci");
         buttonNames.add("Animals");
-        buttonNames.add("Art");
         buttonNames.add("Fantasy");
         buttonNames.add("History");
 
@@ -216,10 +216,10 @@ public class MainActivity extends AppCompatActivity  {
         buttonColors.add(Color.CYAN);
 
         buttonIcons = new ArrayList<>();
+        buttonIcons.add(R.drawable.main_activity_button_art_icon);
         buttonIcons.add(R.drawable.main_activity_button_sports_icon);
         buttonIcons.add(R.drawable.main_activity_button_computer_science_icon);
         buttonIcons.add(R.drawable.main_activity_button_animals_icon);
-        buttonIcons.add(R.drawable.main_activity_button_art_icon);
         buttonIcons.add(R.drawable.main_activity_button_mythology_icon);
         buttonIcons.add(R.drawable.main_activity_button_history_icon);
 
@@ -254,11 +254,12 @@ public class MainActivity extends AppCompatActivity  {
     private void navigateToSignInPage() {
 
 
-        Intent intent = new Intent(MainActivity.this, SignInPage.class);
+        Intent intent = new Intent(MainActivity.this, SignInPageActivity.class);
         startActivity(intent);
         finish();
     }
     private void populateDatabase(String fileName) throws IOException {
+
         // Read file
         InputStream inputStream = getAssets().open(fileName);
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
@@ -268,9 +269,11 @@ public class MainActivity extends AppCompatActivity  {
         JsonObject jsonObject = gson.fromJson(inputStreamReader, JsonObject.class);
         JsonArray resultsArray = jsonObject.getAsJsonArray("results");
 
-        ArrayList<Question> questions = new ArrayList<>();
 
         // Save the Question objects to DynamoDB
+
+        Integer questionNumber = 0;
+
         for (JsonElement element : resultsArray) {
             JsonObject questionObject = element.getAsJsonObject();
             String category = questionObject.get("category").getAsString();
@@ -299,17 +302,20 @@ public class MainActivity extends AppCompatActivity  {
                     .correctAnswer(correctAnswer)
                     .incorrectAnswers(incorrectAnswers)
                     .build();
-                 questions.add(question);
+                 questions.put(questionNumber, question);
+                 questionNumber++;
+        }
+
+
 //            Amplify.API.mutate(ModelMutation.create(question),
 //                    response -> Log.i("MyAmplifyApp", "Todo with id: " + response.getData().getId()),
 //                    error -> Log.e("MyAmplifyApp", "Create failed", error)
 //            );
-        }
 
-        Amplify.API.mutate(ModelMutation.create(questions.get(0)),
-                response -> Log.i("MyAmplifyApp", "Todo with id: " + response.getData().getId()),
-                error -> Log.e("MyAmplifyApp", "Create failed", error)
-        );
+//        Amplify.API.mutate(ModelMutation.create(questions.get(0)),
+//                response -> Log.i("MyAmplifyApp", "Todo with id: " + response.getData().getId()),
+//                error -> Log.e("MyAmplifyApp", "Create failed", error)
+//        );
 
         // Close the streams
         inputStreamReader.close();

@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.study.quizzler.R;
-import com.study.quizzler.activities.Quiz;
+import com.study.quizzler.activities.QuizActivity;
 
 import java.util.List;
 
@@ -57,7 +57,7 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ButtonView
                 // You can start a new activity or perform any other action based on the button clicked
 
                 // Example: Start a new activity
-                Intent intent = new Intent(view.getContext(), Quiz.class);
+                Intent intent = new Intent(view.getContext(), QuizActivity.class);
                 view.getContext().startActivity(intent);
             }
         });

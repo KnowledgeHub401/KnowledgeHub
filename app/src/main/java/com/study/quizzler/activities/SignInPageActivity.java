@@ -14,7 +14,7 @@ import com.amplifyframework.core.Amplify;
 import com.study.quizzler.MainActivity;
 import com.study.quizzler.R;
 
-public class SignInPage extends AppCompatActivity {
+public class SignInPageActivity extends AppCompatActivity {
 
     private EditText etUsernameSignIn;
     private EditText etPasswordSignIn;
@@ -34,7 +34,7 @@ public class SignInPage extends AppCompatActivity {
             String password = etPasswordSignIn.getText().toString().trim();
 
             if (username.isEmpty() || password.isEmpty()) {
-                Toast.makeText(SignInPage.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignInPageActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             } else {
                 signInUser(username, password);
             }
@@ -48,7 +48,7 @@ public class SignInPage extends AppCompatActivity {
                 result -> {
                     // Sign-in successful
                     runOnUiThread(() -> {
-                        Toast.makeText(SignInPage.this, "Sign-in successful", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignInPageActivity.this, "Sign-in successful", Toast.LENGTH_SHORT).show();
                         Log.i("Sign in success", result.toString());
                         navigateToMainActivity();
                     });
@@ -56,7 +56,7 @@ public class SignInPage extends AppCompatActivity {
                 error -> {
                     // Sign-in failed
                     runOnUiThread(() -> {
-                        Toast.makeText(SignInPage.this, "Sign-in failed. Please try again.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignInPageActivity.this, "Sign-in failed. Please try again.", Toast.LENGTH_SHORT).show();
                         Log.i("Sign up error", error.toString());
                     });
                 }
@@ -64,13 +64,13 @@ public class SignInPage extends AppCompatActivity {
     }
 
    private void navigateToMainActivity() {
-        Intent intent = new Intent(SignInPage.this, MainActivity.class);
+        Intent intent = new Intent(SignInPageActivity.this, MainActivity.class);
        startActivity(intent);
        finish();
    }
 
     public void onSignUpClicked(View view) {
-        Intent intent = new Intent(SignInPage.this, SignUpPage.class);
+        Intent intent = new Intent(SignInPageActivity.this, SignUpPageActivity.class);
         startActivity(intent);
     }
 }

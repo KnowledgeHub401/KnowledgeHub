@@ -1,5 +1,4 @@
 
-
 package com.study.quizzler.activities;
 
         import androidx.annotation.NonNull;
@@ -15,7 +14,7 @@ package com.study.quizzler.activities;
         import com.study.quizzler.R;
         import com.study.quizzler.listeners.NavigationItemSelectedListener;
 
-public class SettingsPage extends AppCompatActivity {
+public class AboutUsActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -24,7 +23,7 @@ public class SettingsPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings_page);
+        setContentView(R.layout.activity_about_us);
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_menu);

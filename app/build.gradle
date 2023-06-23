@@ -6,6 +6,10 @@ android {
     namespace 'com.study.quizzler'
     compileSdk 33
 
+    packagingOptions {
+        resources.excludes.add("META-INF/*")
+    }
+
     defaultConfig {
         applicationId "com.study.quizzler"
         minSdk 24

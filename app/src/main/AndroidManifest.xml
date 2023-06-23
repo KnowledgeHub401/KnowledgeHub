@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
-        android:name=".quizzlerApplication"
+        android:name=".QuizzlerApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -13,23 +13,23 @@
         android:theme="@style/Theme.Quizzler"
         tools:targetApi="31">
         <activity
-            android:name=".activities.Quiz"
+            android:name=".activities.QuizActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.SettingsPage"
+            android:name=".activities.SettingsPageActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.AboutUs"
+            android:name=".activities.AboutUsActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.HistoryPage"
+            android:name=".activities.HistoryActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.SignUpPage"
+            android:name=".activities.SignUpPageActivity"
             android:exported="false" />
 
         <activity
-            android:name=".activities.SignInPage"
+            android:name=".activities.SignInPageActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
