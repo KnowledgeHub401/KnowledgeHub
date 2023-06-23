@@ -6,7 +6,6 @@
     <string name="sign_up">Sign Up</string>
     <string name="sign_in">Sign In</string>
     <string name="don_t_have_an_account_sign_up">Don\'t have an account? Sign up</string>
-    =======
     <string name="about_us">About Us</string>
     <string name="settings" />
     <string name="nav_menu_answers_button" />
@@ -35,6 +34,4 @@
     <string name="answerFour">Answer Four</string>
     <string name="answerThree">Answer Three</string>
     <string name="answerTwo">Answer Two</string>
-
-    >>>>>>> c4a9cc3c1cd267519b22e4c35a899124b0c03689
 </resources>
