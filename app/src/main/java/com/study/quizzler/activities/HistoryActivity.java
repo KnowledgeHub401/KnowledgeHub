@@ -7,16 +7,12 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Button;
 
-import com.amplifyframework.api.graphql.model.ModelPagination;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
-import com.amplifyframework.datastore.generated.model.Question;
 import com.amplifyframework.datastore.generated.model.UserQuestion;
 import com.google.android.material.navigation.NavigationView;
 import com.study.quizzler.R;
@@ -24,11 +20,10 @@ import com.study.quizzler.R;
 import com.study.quizzler.listeners.NavigationItemSelectedListener;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
-public class HistoryPage extends AppCompatActivity {
+public class HistoryActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;

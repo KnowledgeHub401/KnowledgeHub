@@ -12,10 +12,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 import com.study.quizzler.MainActivity;
 import com.study.quizzler.R;
-import com.study.quizzler.activities.AboutUs;
-import com.study.quizzler.activities.HistoryPage;
-import com.study.quizzler.activities.SettingsPage;
-import com.study.quizzler.activities.SignInPage;
+import com.study.quizzler.activities.AboutUsActivity;
+import com.study.quizzler.activities.HistoryActivity;
+import com.study.quizzler.activities.SettingsPageActivity;
+import com.study.quizzler.activities.SignInPageActivity;
 
 public class NavigationItemSelectedListener implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -72,25 +72,25 @@ public class NavigationItemSelectedListener implements NavigationView.OnNavigati
         ((Activity) context).finish(); // Finish the current activity
     }
     private void OpenSettingsActivity(){
-        Intent intent = new Intent(context, SettingsPage.class);
+        Intent intent = new Intent(context, SettingsPageActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Clear the activity stack
         context.startActivity(intent);
         ((Activity) context).finish(); // Finish the current activity
     }
     private void OpenQuestionsPage(){
-        Intent intent = new Intent(context, HistoryPage.class);
+        Intent intent = new Intent(context, HistoryActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Clear the activity stack
         context.startActivity(intent);
         ((Activity) context).finish(); // Finish the current activity
     }
     private void OpenAboutUsPage(){
-        Intent intent = new Intent(context, AboutUs.class);
+        Intent intent = new Intent(context, AboutUsActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Clear the activity stack
         context.startActivity(intent);
         ((Activity) context).finish(); // Finish the current activity
     }
     private void Logout(){
-        Intent intent = new Intent(context, SignInPage.class);
+        Intent intent = new Intent(context, SignInPageActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Clear the activity stack
         context.startActivity(intent);
         ((Activity) context).finish(); // Finish the current activity

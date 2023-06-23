@@ -19,8 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.amplifyframework.api.graphql.model.ModelPagination;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
-import com.amplifyframework.datastore.generated.model.CategoryEnum;
-import com.amplifyframework.datastore.generated.model.DifficultyEnum;
 import com.amplifyframework.datastore.generated.model.Question;
 import com.amplifyframework.datastore.generated.model.UserQuestion;
 import com.study.quizzler.R;
@@ -31,15 +29,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-
-import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
-import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
-import software.amazon.awssdk.services.dynamodb.model.QueryRequest;
-import software.amazon.awssdk.services.dynamodb.model.QueryResponse;
 
 
-public class Quiz extends AppCompatActivity {
+public class QuizActivity extends AppCompatActivity {
 
     private FragmentContainerView questionsFragmentFragmentContainerView;
     private TextView questionFragmentAnswerFourTextView;
@@ -108,18 +100,20 @@ public class Quiz extends AppCompatActivity {
     }
 
     protected void getQuestions() {
-        Amplify.API.query(
-                ModelQuery.list(UserQuestion.class),
-                success -> {
 
-                    for(UserQuestion question : success.getData()){
-                        userQuestionMap.put(question.getId(), question);
-                    }
-                },
-                failure -> {
-                    Log.i(TAG,"Did not read questions successfully");
-                }
-        );
+
+//        Amplify.API.query(
+//                ModelQuery.list(UserQuestion.class),
+//                success -> {
+//
+//                    for(UserQuestion question : success.getData()){
+//                        userQuestionMap.put(question.getId(), question);
+//                    }
+//                },
+//                failure -> {
+//                    Log.i(TAG,"Did not read questions successfully");
+//                }
+//        );
 
         if (selected.equals("all")) {
             Amplify.API.query(
