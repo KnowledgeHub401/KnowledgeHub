@@ -67,21 +67,21 @@ public class HistoryPage extends AppCompatActivity {
         getUserQuestions();
     }
 
-    public void setUpCorrectAnswersButton () {
-        Button correctAnswersButton = (Button) findViewById(R.id.historyActivityCorrectAnswersButton);
-        correctAnswersButton.setOnClickListener(v -> {
-            selected = "true";
-            getUserQuestions();
-        });
-    }
-
-    public void setUpIncorrectAnswersButton () {
-        Button correctAnswersButton = (Button) findViewById(R.id.historyActivityIncorrectAnswersButton);
-        correctAnswersButton.setOnClickListener(v -> {
-            selected = "false";
-            getUserQuestions();
-        });
-    }
+//    public void setUpCorrectAnswersButton () {
+//        Button correctAnswersButton = (Button) findViewById(R.id.historyActivityCorrectAnswersButton);
+//        correctAnswersButton.setOnClickListener(v -> {
+//            selected = "true";
+//            getUserQuestions();
+//        });
+//    }
+//
+//    public void setUpIncorrectAnswersButton () {
+//        Button correctAnswersButton = (Button) findViewById(R.id.historyActivityIncorrectAnswersButton);
+//        correctAnswersButton.setOnClickListener(v -> {
+//            selected = "false";
+//            getUserQuestions();
+//        });
+//    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
