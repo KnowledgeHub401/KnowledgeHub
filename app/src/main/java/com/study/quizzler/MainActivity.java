@@ -1,17 +1,10 @@
 package com.study.quizzler;
-
-
-
-import static com.amplifyframework.core.Amplify.Auth;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,10 +13,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.view.MenuItem;
 
+import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.auth.result.AuthSignOutResult;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.core.Consumer;
@@ -94,6 +85,19 @@ public class MainActivity extends AppCompatActivity  {
         newValues.add(70.0f);
         updateChartData(newValues);
 
+        Question question = Question.builder()
+                .category(CategoryEnum.Animals)
+                .type("test")
+                .difficulty(DifficultyEnum.easy)
+                .question("test?")
+                .correctAnswer("test")
+                .incorrectAnswers(new ArrayList<>())
+                .build();
+
+        Amplify.API.mutate(ModelMutation.create(question),
+                response -> Log.i("MyAmplifyApp", "Todo with id: " + response.getData().getId()),
+                error -> Log.e("MyAmplifyApp", "Create failed", error)
+        );
 
 //            try {
 //                populateDatabase("trivia.json");
@@ -254,56 +258,63 @@ public class MainActivity extends AppCompatActivity  {
         startActivity(intent);
         finish();
     }
-//    private void populateDatabase(String fileName) throws IOException {
-//        // Read file
-//        InputStream inputStream = getAssets().open(fileName);
-//        InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
-//
-//        // Use Gson to parse JSON data
-//        Gson gson = new Gson();
-//        JsonObject jsonObject = gson.fromJson(inputStreamReader, JsonObject.class);
-//        JsonArray resultsArray = jsonObject.getAsJsonArray("results");
-//
-//        // Save the Question objects to DynamoDB
-//        for (JsonElement element : resultsArray) {
-//            JsonObject questionObject = element.getAsJsonObject();
-//            String category = questionObject.get("category").getAsString();
-//            String type = questionObject.get("type").getAsString();
-//            String difficulty = questionObject.get("difficulty").getAsString();
-//            String questionText = questionObject.get("question").getAsString();
-//            String correctAnswer = questionObject.get("correct_answer").getAsString();
-//            JsonArray incorrectAnswersArray = questionObject.getAsJsonArray("incorrect_answers");
-//            List<String> incorrectAnswers = new ArrayList<>();
-//            for (JsonElement incorrectAnswerElement : incorrectAnswersArray) {
-//                incorrectAnswers.add(incorrectAnswerElement.getAsString());
-//            }
-//
-//            String typeValue;
-//            if (type.equalsIgnoreCase("multiple") || type.equalsIgnoreCase("true")) {
-//                typeValue = "multiple";
-//            } else {
-//                typeValue = "single";
-//            }
-//
-//            Question question = Question.builder()
-//                    .category(CategoryEnum.valueOf(category))
-//                    .type(typeValue)
-//                    .difficulty(DifficultyEnum.valueOf(difficulty))
-//                    .question(questionText)
-//                    .correctAnswer(correctAnswer)
-//                    .incorrectAnswers(incorrectAnswers)
-//                    .build();
-//
-//            Amplify.DataStore.save(question,
-//                    success -> Log.i(TAG, "Saved Question: " + success.item().getId()),
-//                    error -> Log.e(TAG, "Failed to save Question: " + error)
+    private void populateDatabase(String fileName) throws IOException {
+        // Read file
+        InputStream inputStream = getAssets().open(fileName);
+        InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+
+        // Use Gson to parse JSON data
+        Gson gson = new Gson();
+        JsonObject jsonObject = gson.fromJson(inputStreamReader, JsonObject.class);
+        JsonArray resultsArray = jsonObject.getAsJsonArray("results");
+
+        ArrayList<Question> questions = new ArrayList<>();
+
+        // Save the Question objects to DynamoDB
+        for (JsonElement element : resultsArray) {
+            JsonObject questionObject = element.getAsJsonObject();
+            String category = questionObject.get("category").getAsString();
+            String type = questionObject.get("type").getAsString();
+            String difficulty = questionObject.get("difficulty").getAsString();
+            String questionText = questionObject.get("question").getAsString();
+            String correctAnswer = questionObject.get("correct_answer").getAsString();
+            JsonArray incorrectAnswersArray = questionObject.getAsJsonArray("incorrect_answers");
+            List<String> incorrectAnswers = new ArrayList<>();
+            for (JsonElement incorrectAnswerElement : incorrectAnswersArray) {
+                incorrectAnswers.add(incorrectAnswerElement.getAsString());
+            }
+
+            String typeValue;
+            if (type.equalsIgnoreCase("multiple") || type.equalsIgnoreCase("true")) {
+                typeValue = "multiple";
+            } else {
+                typeValue = "single";
+            }
+
+            Question question = Question.builder()
+                    .category(CategoryEnum.valueOf(category))
+                    .type(typeValue)
+                    .difficulty(DifficultyEnum.valueOf(difficulty))
+                    .question(questionText)
+                    .correctAnswer(correctAnswer)
+                    .incorrectAnswers(incorrectAnswers)
+                    .build();
+                 questions.add(question);
+//            Amplify.API.mutate(ModelMutation.create(question),
+//                    response -> Log.i("MyAmplifyApp", "Todo with id: " + response.getData().getId()),
+//                    error -> Log.e("MyAmplifyApp", "Create failed", error)
 //            );
-//        }
-//
-//        // Close the streams
-//        inputStreamReader.close();
-//        inputStream.close();
-//    }
+        }
+
+        Amplify.API.mutate(ModelMutation.create(questions.get(0)),
+                response -> Log.i("MyAmplifyApp", "Todo with id: " + response.getData().getId()),
+                error -> Log.e("MyAmplifyApp", "Create failed", error)
+        );
+
+        // Close the streams
+        inputStreamReader.close();
+        inputStream.close();
+    }
 //
 
 }

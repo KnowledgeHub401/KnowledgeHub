@@ -7,13 +7,16 @@
     android:id="@+id/drawer_layout"
     tools:context=".activities.HistoryPage">
 
-    <com.google.android.material.navigation.NavigationView
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="com.study.quizzler.fragments.QuestionsFragment"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        app:headerLayout="@layout/header"
-        app:menu="@menu/main_menu"
-        android:id="@+id/nav_menu"
-        android:layout_gravity="start"
-        />
+        android:layout_height="wrap_content" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView3"
+        android:name="com.study.quizzler.fragments.QuestionsFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
