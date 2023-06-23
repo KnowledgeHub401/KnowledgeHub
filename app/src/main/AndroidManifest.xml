@@ -25,7 +25,7 @@
             android:name=".activities.HistoryActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.SignUpPageActivity"
+            android:name=".activities.SignUpPage"
             android:exported="false" />
 
         <activity

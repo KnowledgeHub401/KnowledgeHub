@@ -70,7 +70,7 @@ public class SignInPageActivity extends AppCompatActivity {
    }
 
     public void onSignUpClicked(View view) {
-        Intent intent = new Intent(SignInPageActivity.this, SignUpPageActivity.class);
+        Intent intent = new Intent(SignInPageActivity.this, SignUpPage.class);
         startActivity(intent);
     }
 }

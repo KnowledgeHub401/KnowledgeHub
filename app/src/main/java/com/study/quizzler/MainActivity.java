@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity  {
     private List<String> buttonNames;
     private List<Integer> buttonColors;
     private List<Integer> buttonIcons;
+    private List<String> buttonValues;
     public static Map<Integer, Question> questions = new HashMap<>();
 
 
@@ -223,7 +224,16 @@ public class MainActivity extends AppCompatActivity  {
         buttonIcons.add(R.drawable.main_activity_button_mythology_icon);
         buttonIcons.add(R.drawable.main_activity_button_history_icon);
 
-        buttonAdapter = new ButtonAdapter(buttonNames, buttonColors, buttonIcons);
+        buttonValues = new ArrayList<>();
+        buttonValues.add("All");
+        buttonValues.add("Sports");
+        buttonValues.add("Science: Computers");
+        buttonValues.add("Animals");
+        buttonValues.add("Mythology");
+        buttonValues.add("History");
+
+
+        buttonAdapter = new ButtonAdapter(buttonNames, buttonColors, buttonIcons, buttonValues);
         recyclerView.setAdapter(buttonAdapter);
 
         // Adjust the spanCount and spacing based on your desired layout

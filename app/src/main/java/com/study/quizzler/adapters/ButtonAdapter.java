@@ -20,11 +20,13 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ButtonView
     private List<String> buttonNames;
     private List<Integer> buttonColors;
     private List<Integer> buttonIcons;
+    private List<String> buttonValues;
 
-    public ButtonAdapter(List<String> buttonNames, List<Integer> buttonColors, List<Integer> buttonIcons) {
+    public ButtonAdapter(List<String> buttonNames, List<Integer> buttonColors, List<Integer> buttonIcons, List<String> buttonValues) {
         this.buttonNames = buttonNames;
         this.buttonColors = buttonColors;
         this.buttonIcons = buttonIcons;
+        this.buttonValues = buttonValues;
     }
 
     @NonNull
@@ -39,9 +41,12 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ButtonView
         String buttonName = buttonNames.get(position);
         int buttonColor = buttonColors.get(position);
         int buttonIcon = buttonIcons.get(position);
+        String buttonValue = buttonValues.get(position);
+
 
         holder.button.setText(buttonName);
         holder.button.setBackgroundColor(buttonColor);
+
 
         // Set the icon on the left side and center it
         holder.button.setCompoundDrawablesWithIntrinsicBounds(buttonIcon, 0, 0, 0);
@@ -56,8 +61,8 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ButtonView
                 // Handle the button click event here
                 // You can start a new activity or perform any other action based on the button clicked
 
-                // Example: Start a new activity
                 Intent intent = new Intent(view.getContext(), QuizActivity.class);
+                intent.putExtra("selected_category", buttonValue);
                 view.getContext().startActivity(intent);
             }
         });
