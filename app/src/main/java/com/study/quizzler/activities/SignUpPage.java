@@ -15,7 +15,7 @@ import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.study.quizzler.R;
 
-public class SignUpPageActivity extends AppCompatActivity {
+public class SignUpPage extends AppCompatActivity {
 
     private EditText etUsername;
     private EditText etEmail;
@@ -37,7 +37,7 @@ public class SignUpPageActivity extends AppCompatActivity {
             String password = etPassword.getText().toString().trim();
 
             if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(SignUpPageActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignUpPage.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             } else {
                 signUpUser(name, email, password);
 //                Toast.makeText(SignUpPage.this, "Sign-up successful", Toast.LENGTH_SHORT).show();
@@ -55,7 +55,7 @@ public class SignUpPageActivity extends AppCompatActivity {
                 result -> {
                     // Sign-up successful
                     runOnUiThread(() -> {
-                        Toast.makeText(SignUpPageActivity.this, "Sign-up successful", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpPage.this, "Sign-up successful", Toast.LENGTH_SHORT).show();
                         Log.i("Sign up success", result.toString());
                         showConfirmationDialog(username);
                     });
@@ -63,7 +63,7 @@ public class SignUpPageActivity extends AppCompatActivity {
                 error -> {
                     // Sign-up failed
                     runOnUiThread(() -> {
-                        Toast.makeText(SignUpPageActivity.this, "Sign-up failed. Please try again.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpPage.this, "Sign-up failed. Please try again.", Toast.LENGTH_SHORT).show();
                         Log.i("Sign up error", error.toString());
                     });
                 });
@@ -95,15 +95,15 @@ public class SignUpPageActivity extends AppCompatActivity {
         Amplify.Auth.confirmSignUp(username, confirmationCode,
                 result -> {
                     runOnUiThread(() -> {
-                        Toast.makeText(SignUpPageActivity.this, "Confirmation Successful", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpPage.this, "Confirmation Successful", Toast.LENGTH_SHORT).show();
                         navigateToSignInPage();
                     });
                 },
-                error -> runOnUiThread(() -> Toast.makeText(SignUpPageActivity.this, "Confirmation failed. Please try again", Toast.LENGTH_SHORT).show()));
+                error -> runOnUiThread(() -> Toast.makeText(SignUpPage.this, "Confirmation failed. Please try again", Toast.LENGTH_SHORT).show()));
     }
 
     private void navigateToSignInPage() {
-        Intent intent = new Intent(SignUpPageActivity.this, SignInPageActivity.class);
+        Intent intent = new Intent(SignUpPage.this, SignInPageActivity.class);
         startActivity(intent);
         finish();
     }

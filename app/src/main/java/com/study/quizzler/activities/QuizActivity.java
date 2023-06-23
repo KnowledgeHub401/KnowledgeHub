@@ -1,21 +1,18 @@
 package com.study.quizzler.activities;
 
+import static com.study.quizzler.MainActivity.questions;
 import static java.util.Map.of;
 
+import android.content.Intent;
 import android.os.Bundle;
-
 import android.widget.TextView;
-
 import android.util.Log;
-
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.amplifyframework.api.graphql.model.ModelPagination;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
@@ -23,12 +20,12 @@ import com.amplifyframework.datastore.generated.model.Question;
 import com.amplifyframework.datastore.generated.model.UserQuestion;
 import com.study.quizzler.R;
 import com.study.quizzler.fragments.QuestionsFragment;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 
 public class QuizActivity extends AppCompatActivity {
@@ -43,25 +40,27 @@ public class QuizActivity extends AppCompatActivity {
 
     private static final String TAG = "Quiz";
 
-
-    String selected;
+    Intent intent = getIntent();
+    String selected = intent.getStringExtra("selected_category");
 
 
     List<UserQuestion> quizQuestions = new ArrayList<>();
-    Map<String, UserQuestion> userQuestionMap = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_questions);
+        setContentView(R.layout.activity_quiz_page);
 
-        questionsFragmentFragmentContainerView = findViewById(R.id.questionsFragmentFragmentContainerView);
-        questionFragmentAnswerFourTextView = findViewById(R.id.questionFragmentAnswerFourTextView);
-        questionFragmentAnswerThreeTextView = findViewById(R.id.questionFragmentAnswerThreeTextView);
-        questionFragmentAnswerTwoTextView = findViewById(R.id.questionFragmentAnswerTwoTextView);
-        questionFragmentAnswerOneTextView = findViewById(R.id.questionFragmentAnswerOneTextView);
-        questionsFragmentQuestionTextView = findViewById(R.id.questionsFragmentQuestionTextView);
-
+//        questionsFragmentFragmentContainerView = findViewById(R.id.questionsFragmentFragmentContainerView);
+//        questionFragmentAnswerFourTextView = findViewById(R.id.questionFragmentAnswerFourTextView);
+//        questionFragmentAnswerThreeTextView = findViewById(R.id.questionFragmentAnswerThreeTextView);
+//        questionFragmentAnswerTwoTextView = findViewById(R.id.questionFragmentAnswerTwoTextView);
+//        questionFragmentAnswerOneTextView = findViewById(R.id.questionFragmentAnswerOneTextView);
+//        questionsFragmentQuestionTextView = findViewById(R.id.questionsFragmentQuestionTextView);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            selected = extras.getString("selected_category");
+        }
         // Create Fragment Instance
         QuestionsFragment questionsFragment = new QuestionsFragment();
 
@@ -76,6 +75,8 @@ public class QuizActivity extends AppCompatActivity {
         fragmentTransaction.commit();
 
         questionsFragmentRecyclerViewSetUp();
+
+
 
     }
 
@@ -92,11 +93,25 @@ public class QuizActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         getQuestions();
+    }
 
 
+    public static List<Integer> generateRandomIndeces(int count, int min, int max) {
+        if (count > (max - min + 1)) {
+            throw new IllegalArgumentException("Cannot generate more unique numbers than the range allows.");
+        }
 
+        List<Integer> numbers = new ArrayList<>();
+        Random random = new Random();
 
+        while (numbers.size() < count) {
+            int randomNumber = random.nextInt(max - min + 1) + min;
+            if (!numbers.contains(randomNumber)) {
+                numbers.add(randomNumber);
+            }
+        }
 
+        return numbers;
     }
 
     protected void getQuestions() {
@@ -112,56 +127,87 @@ public class QuizActivity extends AppCompatActivity {
 //                },
 //                failure -> {
 //                    Log.i(TAG,"Did not read questions successfully");
-//                }
+//                }`
 //        );
 
         if (selected.equals("all")) {
-            Amplify.API.query(
-                    ModelQuery.list(Question.class, ModelPagination.limit(10)),
-                    response -> {
-                        Collections.shuffle(Collections.singletonList(response.getData()));
-                        for (Question question : response.getData()) {
-                            if (userQuestionMap.containsKey(question.getId())) {
-                                quizQuestions.add(userQuestionMap.get(question.getId()));
-                            } else {
-                                UserQuestion userQuestion = UserQuestion.builder()
-                                        .category(question.getCategory())
-                                        .type(question.getType())
-                                        .difficulty(question.getDifficulty())
-                                        .question(question.getQuestion())
-                                        .correctAnswer(question.getCorrectAnswer())
-                                        .incorrectAnswers(question.getIncorrectAnswers())
-                                        .build();
-                                quizQuestions.add(userQuestion);
-                            }
-                        }
-
-                    },
-                    error -> Log.e("MyAmplifyApp", "Query failure", error)
-            );
+            List<Integer> randomIndeces = generateRandomIndeces(10,0,249);
+            for(Integer index : randomIndeces) {
+                Question question = questions.get(index);
+                UserQuestion userQuestion = UserQuestion.builder()
+                        .category(question.getCategory())
+                        .type(question.getType())
+                        .difficulty(question.getDifficulty())
+                        .question(question.getQuestion())
+                        .correctAnswer(question.getCorrectAnswer())
+                        .incorrectAnswers(question.getIncorrectAnswers())
+                        .build();
+                quizQuestions.add(userQuestion);
+            }
+//            Amplify.API.query(
+//                    ModelQuery.list(Question.class, ModelPagination.limit(10)),
+//                    response -> {
+//                        Collections.shuffle(Collections.singletonList(response.getData()));
+//                        for (Question question : response.getData()) {
+//                            if (userQuestionMap.containsKey(question.getId())) {
+//                                quizQuestions.add(userQuestionMap.get(question.getId()));
+//                            } else {
+//                                UserQuestion userQuestion = UserQuestion.builder()
+//                                        .category(question.getCategory())
+//                                        .type(question.getType())
+//                                        .difficulty(question.getDifficulty())
+//                                        .question(question.getQuestion())
+//                                        .correctAnswer(question.getCorrectAnswer())
+//                                        .incorrectAnswers(question.getIncorrectAnswers())
+//                                        .build();
+//                                quizQuestions.add(userQuestion);
+//                            }randomIndices
+//
+//                    },
+//                    error -> Log.e("MyAmplifyApp", "Query failure", error)
+//            );
         } else {
-            Amplify.API.query(
-                    ModelQuery.list(Question.class, Question.CATEGORY.contains(selected), ModelPagination.limit(10)),
-                    response -> {
-                        Collections.shuffle(Collections.singletonList(response.getData()));
-                        for (Question question : response.getData()) {
-                            if (userQuestionMap.containsKey(question.getId())) {
-                                quizQuestions.add(userQuestionMap.get(question.getId()));
-                            } else {
-                                UserQuestion userQuestion = UserQuestion.builder()
-                                        .category(question.getCategory())
-                                        .type(question.getType())
-                                        .difficulty(question.getDifficulty())
-                                        .question(question.getQuestion())
-                                        .correctAnswer(question.getCorrectAnswer())
-                                        .incorrectAnswers(question.getIncorrectAnswers())
-                                        .build();
-                                quizQuestions.add(userQuestion);
-                            }
-                        }
-
-                    },
-                    error -> Log.e("MyAmplifyApp", "Query failure", error));
+            List<Question> curatedQuestions = new ArrayList<>();
+            for(Map.Entry<Integer,Question> questionNode : questions.entrySet()) {
+                if (questionNode.getValue().getCategory().equals(selected)) {
+                    curatedQuestions.add(questionNode.getValue());
+                }
+            }
+            List<Integer> randomIndices = generateRandomIndeces(10,0,49);
+            for(Integer index : randomIndices) {
+                Question question = curatedQuestions.get(index);
+                UserQuestion userQuestion = UserQuestion.builder()
+                        .category(question.getCategory())
+                        .type(question.getType())
+                        .difficulty(question.getDifficulty())
+                        .question(question.getQuestion())
+                        .correctAnswer(question.getCorrectAnswer())
+                        .incorrectAnswers(question.getIncorrectAnswers())
+                        .build();
+                quizQuestions.add(userQuestion);
+            }
+//            Amplify.API.query(
+//                    ModelQuery.list(Question.class, Question.CATEGORY.contains(selected), ModelPagination.limit(10)),
+//                    response -> {
+//                        Collections.shuffle(Collections.singletonList(response.getData()));
+//                        for (Question question : response.getData()) {
+//                            if (userQuestionMap.containsKey(question.getId())) {
+//                                quizQuestions.add(userQuestionMap.get(question.getId()));
+//                            } else {
+//                                UserQuestion userQuestion = UserQuestion.builder()
+//                                        .category(question.getCategory())
+//                                        .type(question.getType())
+//                                        .difficulty(question.getDifficulty())
+//                                        .question(question.getQuestion())
+//                                        .correctAnswer(question.getCorrectAnswer())
+//                                        .incorrectAnswers(question.getIncorrectAnswers())
+//                                        .build();
+//                                quizQuestions.add(userQuestion);
+//                            }
+//                        }
+//
+//                    },
+//                    error -> Log.e("MyAmplifyApp", "Query failure", error));
         }
 //        DynamoDbClient dynamoDbClient = DynamoDbClient.create();
 //        // Specify the table name
