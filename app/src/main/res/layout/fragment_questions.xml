@@ -7,74 +7,74 @@
     tools:context=".fragments.QuestionsFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/questionsFragmentFragment"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/questionsFragmentFragmentContainerView"
         android:layout_width="385dp"
         android:layout_height="617dp"
         android:layout_marginStart="13dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="64dp"
         android:layout_marginEnd="13dp"
         android:layout_marginBottom="18dp"
-        android:text="@string/hello_blank_fragment"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
 
     <TextView
         android:id="@+id/questionFragmentAnswerFourTextView"
         android:layout_width="328dp"
         android:layout_height="56dp"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="40dp"
         android:text="@string/answerFour"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/questionsFragmentFragment"
+        app:layout_constraintStart_toStartOf="@+id/questionsFragmentFragmentContainerView"
         app:layout_constraintTop_toBottomOf="@+id/questionFragmentAnswerThreeTextView" />
 
     <TextView
         android:id="@+id/questionFragmentAnswerThreeTextView"
         android:layout_width="328dp"
         android:layout_height="56dp"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="40dp"
         android:text="@string/answerThree"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/questionsFragmentFragment"
-        app:layout_constraintTop_toBottomOf="@+id/questionFragmentAnswerOneTextView2" />
+        app:layout_constraintStart_toStartOf="@+id/questionsFragmentFragmentContainerView"
+        app:layout_constraintTop_toBottomOf="@+id/questionFragmentAnswerTwoTextView" />
 
     <TextView
-        android:id="@+id/questionFragmentAnswerOneTextView2"
+        android:id="@+id/questionFragmentAnswerTwoTextView"
         android:layout_width="328dp"
         android:layout_height="56dp"
-        android:layout_marginStart="29dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="40dp"
         android:text="@string/answerTwo"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/questionsFragmentFragment"
+        app:layout_constraintStart_toStartOf="@+id/questionsFragmentFragmentContainerView"
         app:layout_constraintTop_toBottomOf="@+id/questionFragmentAnswerOneTextView" />
 
     <TextView
-        android:id="@+id/questionsFragmentQuestionTwoTextView"
+        android:id="@+id/questionsFragmentQuestionTextView"
         android:layout_width="342dp"
         android:layout_height="129dp"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
         android:text="@string/question"
         android:textSize="36sp"
-        app:layout_constraintStart_toStartOf="@+id/questionsFragmentFragment"
-        app:layout_constraintTop_toTopOf="@+id/questionsFragmentFragment" />
+        app:layout_constraintStart_toStartOf="@+id/questionsFragmentFragmentContainerView"
+        app:layout_constraintTop_toTopOf="@+id/questionsFragmentFragmentContainerView" />
 
     <TextView
         android:id="@+id/questionFragmentAnswerOneTextView"
         android:layout_width="328dp"
         android:layout_height="56dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="64dp"
         android:text="@string/answerOne"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/questionsFragmentFragment"
-        app:layout_constraintTop_toBottomOf="@+id/questionsFragmentQuestionTwoTextView" />
+        app:layout_constraintStart_toStartOf="@+id/questionsFragmentFragmentContainerView"
+        app:layout_constraintTop_toBottomOf="@+id/questionsFragmentQuestionTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

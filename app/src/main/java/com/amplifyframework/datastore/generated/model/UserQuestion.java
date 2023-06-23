@@ -9,7 +9,10 @@ import java.util.Objects;
 
 import androidx.core.util.ObjectsCompat;
 
+import com.amplifyframework.core.model.AuthStrategy;
 import com.amplifyframework.core.model.Model;
+import com.amplifyframework.core.model.ModelOperation;
+import com.amplifyframework.core.model.annotations.AuthRule;
 import com.amplifyframework.core.model.annotations.Index;
 import com.amplifyframework.core.model.annotations.ModelConfig;
 import com.amplifyframework.core.model.annotations.ModelField;
@@ -19,7 +22,9 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 
 /** This is an auto generated class representing the UserQuestion type in your schema. */
 @SuppressWarnings("all")
-@ModelConfig(pluralName = "UserQuestions", type = Model.Type.USER, version = 1)
+@ModelConfig(pluralName = "UserQuestions", type = Model.Type.USER, version = 1, authRules = {
+  @AuthRule(allow = AuthStrategy.PUBLIC, operations = { ModelOperation.CREATE, ModelOperation.UPDATE, ModelOperation.DELETE, ModelOperation.READ })
+})
 @Index(name = "byQuiz", fields = {"quizID"})
 @Index(name = "byUser", fields = {"userID"})
 public final class UserQuestion implements Model {
@@ -38,9 +43,9 @@ public final class UserQuestion implements Model {
   private final @ModelField(targetType="String") String type;
   private final @ModelField(targetType="DifficultyEnum") DifficultyEnum difficulty;
   private final @ModelField(targetType="String") String question;
-  public final @ModelField(targetType="String") String correct_answer;
+  private final @ModelField(targetType="String") String correct_answer;
   private final @ModelField(targetType="String") List<String> incorrect_answers;
-  public @ModelField(targetType="Boolean") Boolean answeredCorrectly;
+  private final @ModelField(targetType="Boolean") Boolean answeredCorrectly;
   private final @ModelField(targetType="Quiz") @BelongsTo(targetName = "quizID", targetNames = {"quizID"}, type = Quiz.class) Quiz quiz;
   private final @ModelField(targetType="QuizzlerUser") @BelongsTo(targetName = "userID", targetNames = {"userID"}, type = QuizzlerUser.class) QuizzlerUser user;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;

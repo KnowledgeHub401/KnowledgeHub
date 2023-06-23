@@ -3,11 +3,18 @@ package com.study.quizzler.activities;
 import static java.util.Map.of;
 
 import android.os.Bundle;
+
+import android.widget.TextView;
+
 import android.util.Log;
 
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.amplifyframework.api.graphql.model.ModelPagination;
 import com.amplifyframework.api.graphql.model.ModelQuery;
@@ -33,17 +40,36 @@ import software.amazon.awssdk.services.dynamodb.model.QueryResponse;
 
 
 public class Quiz extends AppCompatActivity {
+
+    private FragmentContainerView questionsFragmentFragmentContainerView;
+    private TextView questionFragmentAnswerFourTextView;
+    private TextView questionFragmentAnswerThreeTextView;
+    private TextView questionFragmentAnswerTwoTextView;
+    private TextView questionFragmentAnswerOneTextView;
+    private TextView questionsFragmentQuestionTextView;
+
+
     private static final String TAG = "Quiz";
+
 
     String selected;
 
 
     List<UserQuestion> quizQuestions = new ArrayList<>();
     Map<String, UserQuestion> userQuestionMap = new HashMap<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.fragment_questions);
+
+        questionsFragmentFragmentContainerView = findViewById(R.id.questionsFragmentFragmentContainerView);
+        questionFragmentAnswerFourTextView = findViewById(R.id.questionFragmentAnswerFourTextView);
+        questionFragmentAnswerThreeTextView = findViewById(R.id.questionFragmentAnswerThreeTextView);
+        questionFragmentAnswerTwoTextView = findViewById(R.id.questionFragmentAnswerTwoTextView);
+        questionFragmentAnswerOneTextView = findViewById(R.id.questionFragmentAnswerOneTextView);
+        questionsFragmentQuestionTextView = findViewById(R.id.questionsFragmentQuestionTextView);
+
         // Create Fragment Instance
         QuestionsFragment questionsFragment = new QuestionsFragment();
 
@@ -54,8 +80,20 @@ public class Quiz extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         // Add the fragment to the container
-        fragmentTransaction.add(R.id.questionsFragmentFragment, questionsFragment);
+        fragmentTransaction.add(R.id.questionsFragmentFragmentContainerView, questionsFragment);
         fragmentTransaction.commit();
+
+        questionsFragmentRecyclerViewSetUp();
+
+    }
+
+    // Grab Recycler View and set Layout
+    private void questionsFragmentRecyclerViewSetUp(){
+        RecyclerView questFragRecyclerView = findViewById(R.id.questionPageActivityQuestionsFragmentRecyclerView);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        questFragRecyclerView.setLayoutManager(layoutManager);
+
+
 
     }
 
