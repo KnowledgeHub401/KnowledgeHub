@@ -19,6 +19,7 @@ import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Question;
 import com.amplifyframework.datastore.generated.model.UserQuestion;
 import com.study.quizzler.R;
+import com.study.quizzler.adapters.QuestionFragmentRecyclerViewAdapter;
 import com.study.quizzler.fragments.QuestionsFragment;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,8 +41,9 @@ public class QuizActivity extends AppCompatActivity {
 
     private static final String TAG = "Quiz";
 
-    Intent intent = getIntent();
-    String selected = intent.getStringExtra("selected_category");
+    String selected;
+
+
 
 
     List<UserQuestion> quizQuestions = new ArrayList<>();
@@ -50,6 +52,18 @@ public class QuizActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_page);
+
+        Intent intent = getIntent();
+        if (intent != null) {
+            String selected = intent.getStringExtra("selected_category");
+        }
+
+        RecyclerView quizActivityRecycleView = (RecyclerView) findViewById(R.id.quizActivityRecyclerView);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        quizActivityRecycleView.setLayoutManager(layoutManager);
+
+        QuestionFragmentRecyclerViewAdapter adapter = new QuestionFragmentRecyclerViewAdapter();
+        quizActivityRecycleView.setAdapter(adapter);
 
 //        questionsFragmentFragmentContainerView = findViewById(R.id.questionsFragmentFragmentContainerView);
 //        questionFragmentAnswerFourTextView = findViewById(R.id.questionFragmentAnswerFourTextView);
@@ -61,38 +75,35 @@ public class QuizActivity extends AppCompatActivity {
         if (extras != null) {
             selected = extras.getString("selected_category");
         }
-        // Create Fragment Instance
-        QuestionsFragment questionsFragment = new QuestionsFragment();
+//        // Create Fragment Instance
+//        QuestionsFragment questionsFragment = new QuestionsFragment();
+//
+//        // Get Fragment Manager
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//
+//        // Fragment Transaction
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//
+//        // Add the fragment to the container
+//        fragmentTransaction.add(R.id.questionsFragmentFragmentContainerView, questionsFragment);
+//        fragmentTransaction.commit();
 
-        // Get Fragment Manager
-        FragmentManager fragmentManager = getSupportFragmentManager();
-
-        // Fragment Transaction
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        // Add the fragment to the container
-        fragmentTransaction.add(R.id.questionsFragmentFragmentContainerView, questionsFragment);
-        fragmentTransaction.commit();
-
-        questionsFragmentRecyclerViewSetUp();
+//        questionsFragmentRecyclerViewSetUp();
 
 
 
     }
 
     // Grab Recycler View and set Layout
-    private void questionsFragmentRecyclerViewSetUp(){
-        RecyclerView questFragRecyclerView = findViewById(R.id.questionPageActivityQuestionsFragmentRecyclerView);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        questFragRecyclerView.setLayoutManager(layoutManager);
-
-
-
-    }
+//    private void questionsFragmentRecyclerViewSetUp(){
+//        RecyclerView questFragRecyclerView = findViewById(R.id.questionPageActivityQuestionsFragmentRecyclerView);
+//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+//        questFragRecyclerView.setLayoutManager(layoutManager);
+//    }
 
     protected void onResume() {
         super.onResume();
-        getQuestions();
+//        getQuestions();
     }
 
 
