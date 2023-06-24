@@ -100,11 +100,11 @@ public class MainActivity extends AppCompatActivity  {
 //                error -> Log.e("MyAmplifyApp", "Create failed", error)
 //        );
 
-//            try {
-//                populateDatabase("trivia.json");
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
+            try {
+                populateDatabase("triviaFinal.json");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
 
         // HAMBURGER MENU CODE
@@ -227,7 +227,7 @@ public class MainActivity extends AppCompatActivity  {
         buttonValues = new ArrayList<>();
         buttonValues.add("All");
         buttonValues.add("Sports");
-        buttonValues.add("Science: Computers");
+        buttonValues.add("Computers");
         buttonValues.add("Animals");
         buttonValues.add("Mythology");
         buttonValues.add("History");

@@ -16,9 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.amplifyframework.api.graphql.model.ModelPagination;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.CategoryEnum;
+import com.amplifyframework.datastore.generated.model.DifficultyEnum;
 import com.amplifyframework.datastore.generated.model.Question;
 import com.amplifyframework.datastore.generated.model.UserQuestion;
+import com.study.quizzler.MainActivity;
 import com.study.quizzler.R;
+import com.study.quizzler.adapters.QuestionFragmentRecyclerViewAdapter;
 import com.study.quizzler.fragments.QuestionsFragment;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,59 +44,106 @@ public class QuizActivity extends AppCompatActivity {
 
     private static final String TAG = "Quiz";
 
-    Intent intent = getIntent();
-    String selected = intent.getStringExtra("selected_category");
-
+    String selected;
 
     List<UserQuestion> quizQuestions = new ArrayList<>();
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_page);
+        Intent intent = getIntent();
+        if (intent != null) {
+            selected = intent.getStringExtra("selected_category");
+        }
+        getQuestions();
+
+        ArrayList<String> incorrectAnswers = new ArrayList<>();
+        incorrectAnswers.add("fake ");
+        incorrectAnswers.add("fake ");
+        incorrectAnswers.add("fake ");
+
+
+
+        UserQuestion userQuestion = UserQuestion.builder()
+                .category(CategoryEnum.Celebrities)
+                .type("yes")
+                .difficulty(DifficultyEnum.easy)
+                .question("yes")
+                .correctAnswer("no")
+                .incorrectAnswers(incorrectAnswers)
+                .build();
+
+        UserQuestion userQuestion2 = UserQuestion.builder()
+                .category(CategoryEnum.Celebrities)
+                .type("yes")
+                .difficulty(DifficultyEnum.easy)
+                .question("yes2")
+                .correctAnswer("no")
+                .incorrectAnswers(incorrectAnswers)
+                .build();
+
+        UserQuestion userQuestion3 = UserQuestion.builder()
+                .category(CategoryEnum.Celebrities)
+                .type("yes")
+                .difficulty(DifficultyEnum.easy)
+                .question("yes3")
+                .correctAnswer("no")
+                .incorrectAnswers(incorrectAnswers)
+                .build();
+
+        List<UserQuestion> userQuestions = new ArrayList<>();
+        userQuestions.add(userQuestion);
+        userQuestions.add(userQuestion2);
+        userQuestions.add(userQuestion3);
+
+
+
+
+        RecyclerView quizActivityRecycleView = (RecyclerView) findViewById(R.id.quizActivityRecyclerView);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        quizActivityRecycleView.setLayoutManager(layoutManager);
+
+        QuestionFragmentRecyclerViewAdapter adapter = new QuestionFragmentRecyclerViewAdapter(quizQuestions);
+        quizActivityRecycleView.setAdapter(adapter);
 
 //        questionsFragmentFragmentContainerView = findViewById(R.id.questionsFragmentFragmentContainerView);
-//        questionFragmentAnswerFourTextView = findViewById(R.id.questionFragmentAnswerFourTextView);
-//        questionFragmentAnswerThreeTextView = findViewById(R.id.questionFragmentAnswerThreeTextView);
-//        questionFragmentAnswerTwoTextView = findViewById(R.id.questionFragmentAnswerTwoTextView);
-//        questionFragmentAnswerOneTextView = findViewById(R.id.questionFragmentAnswerOneTextView);
-//        questionsFragmentQuestionTextView = findViewById(R.id.questionsFragmentQuestionTextView);
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             selected = extras.getString("selected_category");
         }
-        // Create Fragment Instance
-        QuestionsFragment questionsFragment = new QuestionsFragment();
+//        // Create Fragment Instance
+//        QuestionsFragment questionsFragment = new QuestionsFragment();
+//
+//        // Get Fragment Manager
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//
+//        // Fragment Transaction
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//
+//        // Add the fragment to the container
+//        fragmentTransaction.add(R.id.questionsFragmentFragmentContainerView, questionsFragment);
+//        fragmentTransaction.commit();
 
-        // Get Fragment Manager
-        FragmentManager fragmentManager = getSupportFragmentManager();
-
-        // Fragment Transaction
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        // Add the fragment to the container
-        fragmentTransaction.add(R.id.questionsFragmentFragmentContainerView, questionsFragment);
-        fragmentTransaction.commit();
-
-        questionsFragmentRecyclerViewSetUp();
+//        questionsFragmentRecyclerViewSetUp();
 
 
 
     }
 
     // Grab Recycler View and set Layout
-    private void questionsFragmentRecyclerViewSetUp(){
-        RecyclerView questFragRecyclerView = findViewById(R.id.questionPageActivityQuestionsFragmentRecyclerView);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        questFragRecyclerView.setLayoutManager(layoutManager);
-
-
-
-    }
+//    private void questionsFragmentRecyclerViewSetUp(){
+//        RecyclerView questFragRecyclerView = findViewById(R.id.questionPageActivityQuestionsFragmentRecyclerView);
+//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+//        questFragRecyclerView.setLayoutManager(layoutManager);
+//    }
 
     protected void onResume() {
         super.onResume();
-        getQuestions();
     }
 
 
@@ -130,7 +181,7 @@ public class QuizActivity extends AppCompatActivity {
 //                }`
 //        );
 
-        if (selected.equals("all")) {
+        if (selected.equals("All")) {
             List<Integer> randomIndeces = generateRandomIndeces(10,0,249);
             for(Integer index : randomIndeces) {
                 Question question = questions.get(index);
@@ -168,8 +219,8 @@ public class QuizActivity extends AppCompatActivity {
 //            );
         } else {
             List<Question> curatedQuestions = new ArrayList<>();
-            for(Map.Entry<Integer,Question> questionNode : questions.entrySet()) {
-                if (questionNode.getValue().getCategory().equals(selected)) {
+            for(Map.Entry<Integer,Question> questionNode : MainActivity.questions.entrySet()) {
+                if (questionNode.getValue().getCategory().toString().equals(selected)) {
                     curatedQuestions.add(questionNode.getValue());
                 }
             }
