@@ -20,6 +20,7 @@ import com.amplifyframework.datastore.generated.model.CategoryEnum;
 import com.amplifyframework.datastore.generated.model.DifficultyEnum;
 import com.amplifyframework.datastore.generated.model.Question;
 import com.amplifyframework.datastore.generated.model.UserQuestion;
+import com.study.quizzler.MainActivity;
 import com.study.quizzler.R;
 import com.study.quizzler.adapters.QuestionFragmentRecyclerViewAdapter;
 import com.study.quizzler.fragments.QuestionsFragment;
@@ -54,6 +55,11 @@ public class QuizActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_page);
+        Intent intent = getIntent();
+        if (intent != null) {
+            selected = intent.getStringExtra("selected_category");
+        }
+        getQuestions();
 
         ArrayList<String> incorrectAnswers = new ArrayList<>();
         incorrectAnswers.add("fake ");
@@ -95,16 +101,13 @@ public class QuizActivity extends AppCompatActivity {
         userQuestions.add(userQuestion3);
 
 
-        Intent intent = getIntent();
-        if (intent != null) {
-            String selected = intent.getStringExtra("selected_category");
-        }
+
 
         RecyclerView quizActivityRecycleView = (RecyclerView) findViewById(R.id.quizActivityRecyclerView);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         quizActivityRecycleView.setLayoutManager(layoutManager);
 
-        QuestionFragmentRecyclerViewAdapter adapter = new QuestionFragmentRecyclerViewAdapter(userQuestions);
+        QuestionFragmentRecyclerViewAdapter adapter = new QuestionFragmentRecyclerViewAdapter(quizQuestions);
         quizActivityRecycleView.setAdapter(adapter);
 
 //        questionsFragmentFragmentContainerView = findViewById(R.id.questionsFragmentFragmentContainerView);
@@ -141,7 +144,6 @@ public class QuizActivity extends AppCompatActivity {
 
     protected void onResume() {
         super.onResume();
-//        getQuestions();
     }
 
 
@@ -179,8 +181,8 @@ public class QuizActivity extends AppCompatActivity {
 //                }`
 //        );
 
-        if (selected.equals("all")) {
-            List<Integer> randomIndeces = generateRandomIndeces(10,0,249);
+        if (selected.equals("All")) {
+            List<Integer> randomIndeces = generateRandomIndeces(10,0,9);
             for(Integer index : randomIndeces) {
                 Question question = questions.get(index);
                 UserQuestion userQuestion = UserQuestion.builder()
@@ -217,12 +219,12 @@ public class QuizActivity extends AppCompatActivity {
 //            );
         } else {
             List<Question> curatedQuestions = new ArrayList<>();
-            for(Map.Entry<Integer,Question> questionNode : questions.entrySet()) {
-                if (questionNode.getValue().getCategory().equals(selected)) {
+            for(Map.Entry<Integer,Question> questionNode : MainActivity.questions.entrySet()) {
+//                if (questionNode.getValue().getCategory().equals(selected)) {
                     curatedQuestions.add(questionNode.getValue());
-                }
+//                }
             }
-            List<Integer> randomIndices = generateRandomIndeces(10,0,49);
+            List<Integer> randomIndices = generateRandomIndeces(10,0,9);
             for(Integer index : randomIndices) {
                 Question question = curatedQuestions.get(index);
                 UserQuestion userQuestion = UserQuestion.builder()

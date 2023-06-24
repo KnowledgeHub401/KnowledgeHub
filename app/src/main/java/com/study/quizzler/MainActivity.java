@@ -100,11 +100,11 @@ public class MainActivity extends AppCompatActivity  {
 //                error -> Log.e("MyAmplifyApp", "Create failed", error)
 //        );
 
-//            try {
-//                populateDatabase("trivia.json");
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
+            try {
+                populateDatabase("trivia.json");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
 
         // HAMBURGER MENU CODE
