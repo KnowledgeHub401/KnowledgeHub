@@ -13,10 +13,17 @@ import com.amplifyframework.datastore.generated.model.UserQuestion;
 import com.study.quizzler.R;
 import com.study.quizzler.fragments.QuestionsFragment;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class QuestionFragmentRecyclerViewAdapter extends RecyclerView.Adapter<QuestionFragmentRecyclerViewAdapter.QuestionViewHolder> {
     List<UserQuestion> userQuestionList;
+
+
+    List<Integer> indeces =  generateRandomIndeces(4,1,5);
+
 
     public QuestionFragmentRecyclerViewAdapter (List<UserQuestion> userQuestionList) {
         this.userQuestionList = userQuestionList;
@@ -29,6 +36,8 @@ public class QuestionFragmentRecyclerViewAdapter extends RecyclerView.Adapter<Qu
         return new QuestionViewHolder(quizQuestionFragment);
     }
 
+
+
     @Override
     public void onBindViewHolder(@NonNull QuestionFragmentRecyclerViewAdapter.QuestionViewHolder holder, int position) {
         TextView questionFragmentAnswerFourTextView = holder.itemView.findViewById(R.id.questionFragmentAnswerFourTextView);
@@ -38,25 +47,58 @@ public class QuestionFragmentRecyclerViewAdapter extends RecyclerView.Adapter<Qu
         TextView questionsFragmentQuestionTextView = holder.itemView.findViewById(R.id.questionsFragmentQuestionTextView);
 
         questionsFragmentQuestionTextView.setText(userQuestionList.get(position).getQuestion());
-        questionFragmentAnswerOneTextView.setText(userQuestionList.get(position).getCorrectAnswer());
-        questionFragmentAnswerTwoTextView.setText(userQuestionList.get(position).getIncorrectAnswers().get(0));
-        questionFragmentAnswerThreeTextView.setText(userQuestionList.get(position).getIncorrectAnswers().get(1));
-        questionFragmentAnswerFourTextView.setText(userQuestionList.get(position).getIncorrectAnswers().get(2));
+
+        // Get the list of answers for the current question
+        List<String> answers = new ArrayList<>();
+        answers.add(userQuestionList.get(position).getCorrectAnswer());
+        answers.addAll(userQuestionList.get(position).getIncorrectAnswers());
+
+        // Shuffle the answers randomly
+        Collections.shuffle(answers);
+
+        // Set the randomized answers to the text views
+        questionFragmentAnswerOneTextView.setText(answers.get(0));
+        questionFragmentAnswerTwoTextView.setText(answers.get(1));
+        questionFragmentAnswerThreeTextView.setText(answers.get(2));
+        questionFragmentAnswerFourTextView.setText(answers.get(3));
+
+        // Get the index of the correct answer in the shuffled list
+        int correctAnswerIndex = answers.indexOf(userQuestionList.get(position).getCorrectAnswer());
 
         questionFragmentAnswerOneTextView.setOnClickListener(v -> {
-            questionFragmentAnswerOneTextView.setBackgroundColor(Color.parseColor("#00FF00"));
+            if (correctAnswerIndex == 0) {
+                questionFragmentAnswerOneTextView.setBackgroundColor(Color.parseColor("#00FF00"));
+            } else {
+                questionFragmentAnswerOneTextView.setBackgroundColor(Color.parseColor("#FF0000"));
+            }
+        });
 
-        });
         questionFragmentAnswerTwoTextView.setOnClickListener(v -> {
-            questionFragmentAnswerTwoTextView.setBackgroundColor(Color.parseColor("#FF0000"));
+            if (correctAnswerIndex == 1) {
+                questionFragmentAnswerTwoTextView.setBackgroundColor(Color.parseColor("#00FF00"));
+            } else {
+                questionFragmentAnswerTwoTextView.setBackgroundColor(Color.parseColor("#FF0000"));
+            }
         });
+
         questionFragmentAnswerThreeTextView.setOnClickListener(v -> {
-            questionFragmentAnswerThreeTextView.setBackgroundColor(Color.parseColor("#FF0000"));
+            if (correctAnswerIndex == 2) {
+                questionFragmentAnswerThreeTextView.setBackgroundColor(Color.parseColor("#00FF00"));
+            } else {
+                questionFragmentAnswerThreeTextView.setBackgroundColor(Color.parseColor("#FF0000"));
+            }
         });
+
         questionFragmentAnswerFourTextView.setOnClickListener(v -> {
-            questionFragmentAnswerFourTextView.setBackgroundColor(Color.parseColor("#FF0000"));
+            if (correctAnswerIndex == 3) {
+                questionFragmentAnswerFourTextView.setBackgroundColor(Color.parseColor("#00FF00"));
+            } else {
+                questionFragmentAnswerFourTextView.setBackgroundColor(Color.parseColor("#FF0000"));
+            }
         });
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -67,5 +109,23 @@ public class QuestionFragmentRecyclerViewAdapter extends RecyclerView.Adapter<Qu
         public QuestionViewHolder(View fragmentItemView) {
             super(fragmentItemView);
         }
+    }
+
+    public static List<Integer> generateRandomIndeces(int count, int min, int max) {
+        if (count > (max - min + 1)) {
+            throw new IllegalArgumentException("Cannot generate more unique numbers than the range allows.");
+        }
+
+        List<Integer> numbers = new ArrayList<>();
+        Random random = new Random();
+
+        while (numbers.size() < count) {
+            int randomNumber = random.nextInt(max - min + 1) + min;
+            if (!numbers.contains(randomNumber)) {
+                numbers.add(randomNumber);
+            }
+        }
+
+        return numbers;
     }
 }
