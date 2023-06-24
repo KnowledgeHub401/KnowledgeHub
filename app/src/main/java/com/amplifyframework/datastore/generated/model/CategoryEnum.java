@@ -9,5 +9,6 @@ public enum CategoryEnum {
   Politics,
   Celebrities,
   Animals,
-  Vehicles
+  Vehicles,
+  Computers
 }

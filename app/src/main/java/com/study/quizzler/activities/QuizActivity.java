@@ -182,7 +182,7 @@ public class QuizActivity extends AppCompatActivity {
 //        );
 
         if (selected.equals("All")) {
-            List<Integer> randomIndeces = generateRandomIndeces(10,0,9);
+            List<Integer> randomIndeces = generateRandomIndeces(10,0,249);
             for(Integer index : randomIndeces) {
                 Question question = questions.get(index);
                 UserQuestion userQuestion = UserQuestion.builder()
@@ -220,11 +220,11 @@ public class QuizActivity extends AppCompatActivity {
         } else {
             List<Question> curatedQuestions = new ArrayList<>();
             for(Map.Entry<Integer,Question> questionNode : MainActivity.questions.entrySet()) {
-//                if (questionNode.getValue().getCategory().equals(selected)) {
+                if (questionNode.getValue().getCategory().toString().equals(selected)) {
                     curatedQuestions.add(questionNode.getValue());
-//                }
+                }
             }
-            List<Integer> randomIndices = generateRandomIndeces(10,0,9);
+            List<Integer> randomIndices = generateRandomIndeces(10,0,49);
             for(Integer index : randomIndices) {
                 Question question = curatedQuestions.get(index);
                 UserQuestion userQuestion = UserQuestion.builder()

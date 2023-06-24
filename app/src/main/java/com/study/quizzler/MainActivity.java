@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity  {
 //        );
 
             try {
-                populateDatabase("trivia.json");
+                populateDatabase("triviaFinal.json");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -227,7 +227,7 @@ public class MainActivity extends AppCompatActivity  {
         buttonValues = new ArrayList<>();
         buttonValues.add("All");
         buttonValues.add("Sports");
-        buttonValues.add("Science: Computers");
+        buttonValues.add("Computers");
         buttonValues.add("Animals");
         buttonValues.add("Mythology");
         buttonValues.add("History");
