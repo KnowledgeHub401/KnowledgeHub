@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.amplifyframework.api.graphql.model.ModelPagination;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.CategoryEnum;
+import com.amplifyframework.datastore.generated.model.DifficultyEnum;
 import com.amplifyframework.datastore.generated.model.Question;
 import com.amplifyframework.datastore.generated.model.UserQuestion;
 import com.study.quizzler.R;
@@ -43,15 +45,55 @@ public class QuizActivity extends AppCompatActivity {
 
     String selected;
 
-
-
-
     List<UserQuestion> quizQuestions = new ArrayList<>();
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_page);
+
+        ArrayList<String> incorrectAnswers = new ArrayList<>();
+        incorrectAnswers.add("fake ");
+        incorrectAnswers.add("fake ");
+        incorrectAnswers.add("fake ");
+
+
+
+        UserQuestion userQuestion = UserQuestion.builder()
+                .category(CategoryEnum.Celebrities)
+                .type("yes")
+                .difficulty(DifficultyEnum.easy)
+                .question("yes")
+                .correctAnswer("no")
+                .incorrectAnswers(incorrectAnswers)
+                .build();
+
+        UserQuestion userQuestion2 = UserQuestion.builder()
+                .category(CategoryEnum.Celebrities)
+                .type("yes")
+                .difficulty(DifficultyEnum.easy)
+                .question("yes2")
+                .correctAnswer("no")
+                .incorrectAnswers(incorrectAnswers)
+                .build();
+
+        UserQuestion userQuestion3 = UserQuestion.builder()
+                .category(CategoryEnum.Celebrities)
+                .type("yes")
+                .difficulty(DifficultyEnum.easy)
+                .question("yes3")
+                .correctAnswer("no")
+                .incorrectAnswers(incorrectAnswers)
+                .build();
+
+        List<UserQuestion> userQuestions = new ArrayList<>();
+        userQuestions.add(userQuestion);
+        userQuestions.add(userQuestion2);
+        userQuestions.add(userQuestion3);
+
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -62,15 +104,11 @@ public class QuizActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         quizActivityRecycleView.setLayoutManager(layoutManager);
 
-        QuestionFragmentRecyclerViewAdapter adapter = new QuestionFragmentRecyclerViewAdapter();
+        QuestionFragmentRecyclerViewAdapter adapter = new QuestionFragmentRecyclerViewAdapter(userQuestions);
         quizActivityRecycleView.setAdapter(adapter);
 
 //        questionsFragmentFragmentContainerView = findViewById(R.id.questionsFragmentFragmentContainerView);
-//        questionFragmentAnswerFourTextView = findViewById(R.id.questionFragmentAnswerFourTextView);
-//        questionFragmentAnswerThreeTextView = findViewById(R.id.questionFragmentAnswerThreeTextView);
-//        questionFragmentAnswerTwoTextView = findViewById(R.id.questionFragmentAnswerTwoTextView);
-//        questionFragmentAnswerOneTextView = findViewById(R.id.questionFragmentAnswerOneTextView);
-//        questionsFragmentQuestionTextView = findViewById(R.id.questionsFragmentQuestionTextView);
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             selected = extras.getString("selected_category");
